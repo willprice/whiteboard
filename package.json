@@ -1,0 +1,12 @@
+{
+  "name": "whiteboard",
+  "version": "0.0.1",
+  "description": "Shared whiteboard website",
+  "main": "index.js",
+  "repository": "https://github.com/willprice/whiteboard",
+  "author": "Will Price",
+  "license": "GPL",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}

@@ -8,13 +8,14 @@
   "license": "GPL",
   "dependencies": {
     "ava": "^0.18.1",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "sqlite": "^2.3.0"
   },
   "scripts": {
     "start": "node src/server.js",
     "test": "ava"
   },
   "ava": {
-      "powerAssert": true
+    "powerAssert": true
   }
 }

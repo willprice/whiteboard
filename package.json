@@ -30,6 +30,6 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "test": "mocha"
+    "test": "mocha-webpack --webpack-config webpack.config.js \"public/**/*.spec.js\""
   }
 }

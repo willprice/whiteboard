@@ -1,0 +1,47 @@
+header {
+    font-family: Arial;
+    font-style: oblique;
+    text-align: center;
+    margin: 0 auto;
+}
+#whiteboard {
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+
+#palette > li {
+    list-style-type: none;
+}
+
+.circle {
+    border-radius: 50%/50%;
+    width: 20px;
+    height: 20px;
+}
+.palette-color {
+    margin: 5px 5px 0px 5px;
+}
+
+#palette-black {
+    background: black;
+}
+#palette-blue {
+    background: blue;
+}
+#palette-gray {
+    background: gray;
+}
+#palette-green {
+    background: green;
+}
+#palette-orange {
+    background: orange;
+}
+#palette-red {
+    background: red;
+}
+
+#palette-yellow {
+    background: yellow;
+}

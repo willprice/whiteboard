@@ -4,12 +4,29 @@
 <head>
   <meta charset="UTF-8"/>
   <title>CollaBoard</title>
-    <script src="build/whiteboard.js"></script>
+  <link rel="stylesheet" href="styles/whiteboard.css">
+  <script src="build/whiteboard.js"></script>
 </head>
 
 <body>
+<header>
   <h1>CollaBoard</h1>
-  <canvas width="960px" height="1000px" id="whiteboard"></canvas>
+</header>
+<canvas width="960px" height="1000px" id="whiteboard"></canvas>
+<ul id="palette">
+  <li id="palette-black" class="palette-color circle"></li>
+  <li id="palette-gray" class="palette-color circle"></li>
+  <li id="palette-blue" class="palette-color circle"></li>
+  <li id="palette-green" class="palette-color circle"></li>
+  <li id="palette-red" class="palette-color circle"></li>
+  <li id="palette-orange" class="palette-color circle"></li>
+  <li id="palette-yellow" class="palette-color circle"></li>
+</ul>
+
+<div>
+  <span>Brush Size:</span>
+  <input id="brush-size" type="range" max="50" min="1">
+</div>
 </body>
 
 </html>

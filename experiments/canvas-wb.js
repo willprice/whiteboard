@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
     }
   }
 
-  canvas.addEventListener('mousedown', function (e) {
+  canvas.addEventListener('startNewPath', function (e) {
     var mouseX = e.pageX - this.offsetLeft
     var mouseY = e.pageY - this.offsetTop
 
@@ -46,7 +46,7 @@ window.addEventListener('load', () => {
     redraw()
   })
 
-  canvas.addEventListener('mouseup', (e) => {
+  canvas.addEventListener('endPath', (e) => {
     paint = false
   })
 
@@ -54,7 +54,7 @@ window.addEventListener('load', () => {
     paint = false
   })
 
-  canvas.addEventListener('mousemove', (e) => {
+  canvas.addEventListener('updatePath', (e) => {
     if (paint) {
       addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true)
       redraw()

@@ -20,20 +20,23 @@ if (inDevelopment) {
     publicPath: webpackConfig.output.publicPath,
     noInfo: true
   }))
-  app.get('/', (request, response) => {
-    ejs.renderFile('public/index.ejs', {}, {}, (err, str) => {
-      if (err) {
 
-      }
-      response.send(str)
-      response.end()
-    })
-  })
+  app.use(express.static('public'))
 
   const livereload = require('livereload')
   let lrserver = livereload.createServer()
   lrserver.watch(path.join(__dirname, 'public'))
 }
+
+app.get('/', (request, response) => {
+  ejs.renderFile('public/index.ejs', {}, {}, (err, str) => {
+    if (err) {
+      log.error(err)
+    }
+    response.send(str)
+    response.end()
+  })
+})
 
 app.listen(port, (error) => {
   if (error) {

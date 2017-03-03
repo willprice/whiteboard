@@ -18,14 +18,14 @@ function drawPixel(canvas, x, y) {
 }
 
 
-whiteboard.addEventListener('mousedown', (event) => {
+whiteboard.addEventListener('startNewPath', (event) => {
   drawing = true
 }, false)
-whiteboard.addEventListener('mouseup', (event) => {
+whiteboard.addEventListener('endPath', (event) => {
   drawing = false
 }, false)
 
-whiteboard.addEventListener('mousemove', (event) => {
+whiteboard.addEventListener('updatePath', (event) => {
   if (!drawing) {
     return
   }

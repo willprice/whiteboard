@@ -15,7 +15,7 @@ module.exports = {
   // defaults to process.cwd()
   context: path.join(__dirname, 'public/'),
   entry: [
-    './client/whiteboard.js'
+    './client/app.js'
   ],
   // Instruct how compiled files should be written to disk
   output: {

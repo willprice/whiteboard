@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>Whiteboard</title>
+</head>
+
+<body>
+  <h1>Whiteboard</h1>
+  <canvas id="whiteboard" width="800" height="800"></canvas>
+  <script>
+let whiteboard = document.getElementById("whiteboard")
+let drawing = false
+
+function drawPixel(canvas, x, y) {
+  canvas.getContext("2d").fillRect(x, y, 1, 1)
+}
+
+
+whiteboard.addEventListener('mousedown', (event) => {
+  drawing = true
+}, false)
+whiteboard.addEventListener('mouseup', (event) => {
+  drawing = false
+}, false)
+
+whiteboard.addEventListener('mousemove', (event) => {
+  if (!drawing) {
+    return
+  }
+  const left = whiteboard.offsetLeft
+  const top = whiteboard.offsetTop
+
+  let x = event.pageX - left
+  let y = event.pageY - top
+  drawPixel(whiteboard, x, y);
+}, false)
+
+  </script>
+</body>
+
+</html>

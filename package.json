@@ -5,19 +5,31 @@
   "main": "index.js",
   "repository": "https://github.com/willprice/whiteboard",
   "author": "Will Price",
-  "license": "GPL",
+  "license": "GPLv3",
   "dependencies": {
+    "bunyan": "^1.8.5",
+    "ejs": "^2.5.6",
     "express": "^4.14.1",
     "sqlite": "^2.3.0"
   },
   "devDependencies": {
-    "ava": "^0.18.1"
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-module-resolver": "^2.5.0",
+    "babel-preset-env": "^1.1.10",
+    "chai": "^3.5.0",
+    "livereload": "^0.6.0",
+    "mocha": "^3.2.0",
+    "mocha-webpack": "^0.7.0",
+    "nodemon": "^1.11.0",
+    "sinon": "^2.0.0-pre.6",
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.1"
   },
   "scripts": {
     "start": "node src/server.js",
-    "test": "ava"
-  },
-  "ava": {
-    "powerAssert": true
+    "test": "mocha"
   }
 }

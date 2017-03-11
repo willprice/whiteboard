@@ -5,6 +5,24 @@ import Point from './point'
 class Path {
   constructor () {
     this.points = []
+    this._color = 'black'
+    this._width = 1
+  }
+
+  setColor (color) {
+    this._color = color
+  }
+
+  color () {
+    return this._color
+  }
+
+  setWidth (width) {
+    this._width = width
+  }
+
+  width () {
+    return this._width
   }
 
   add (x, y) {
@@ -13,12 +31,16 @@ class Path {
 
   draw (canvas) {
     canvas.beginPath()
+    canvas.strokeStyle = this.color()
+    canvas.fillStyle = this.color()
+    canvas.lineWidth = this.width()
     for (let i = 1; i < this.points.length; i++) {
       canvas.moveTo(this.points[i - 1].x, this.points[i - 1].y)
       canvas.lineTo(this.points[i].x, this.points[i].y)
+      canvas.fillRect(this.points[i].x - this.width() / 3, this.points[i].y - this.width() / 3, this.width() * 2 / 3, this.width() * 2 / 3)
     }
-    canvas.closePath()
     canvas.stroke()
+    canvas.closePath()
   }
 }
 export default Path

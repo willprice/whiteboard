@@ -24,6 +24,8 @@ describe('Path', () => {
   function createAndDrawPath () {
     let path = new Path()
     path.add(0, 1)
+    path.setColor('#fff')
+    path.setWidth(5)
 
     path.draw(context)
     return path
@@ -41,6 +43,18 @@ describe('Path', () => {
       createAndDrawPath()
 
       assert(context.stroke.called)
+    })
+
+    it('sets stroke color of path', () => {
+      createAndDrawPath()
+
+      assert.equal(context.strokeStyle, '#fff')
+    })
+
+    it('sets lineWidth', () => {
+      createAndDrawPath()
+
+      assert.equal(context.lineWidth, 5)
     })
   })
 })

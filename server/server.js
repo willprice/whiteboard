@@ -29,6 +29,7 @@ if (inDevelopment) {
 }
 
 app.get('/', (request, response) => {
+  response.type('xhtml')
   ejs.renderFile('public/index.ejs', {}, {}, (err, str) => {
     if (err) {
       log.error(err)

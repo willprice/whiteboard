@@ -4,28 +4,51 @@
 <head>
   <meta charset="UTF-8"/>
   <title>CollaBoard</title>
-  <link rel="stylesheet" href="styles/whiteboard.css">
+  <link rel="stylesheet" type="text/css" href="styles/whiteboard.css" />
   <script src="build/whiteboard.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"/>
 </head>
 
 <body>
 <header>
   <h1>CollaBoard</h1>
 </header>
-<canvas width="960px" height="1000px" id="whiteboard"></canvas>
-<ul id="palette">
-  <li id="palette-black" class="palette-color circle"></li>
-  <li id="palette-gray" class="palette-color circle"></li>
-  <li id="palette-blue" class="palette-color circle"></li>
-  <li id="palette-green" class="palette-color circle"></li>
-  <li id="palette-red" class="palette-color circle"></li>
-  <li id="palette-orange" class="palette-color circle"></li>
-  <li id="palette-yellow" class="palette-color circle"></li>
-</ul>
 
-<div>
-  <span>Brush Size:</span>
-  <input id="brush-size" type="range" max="50" min="1">
+<nav>
+</nav>
+
+<div id="whiteboard-container">
+  <div class="sidebar-tools">
+    <div id="palette-container">
+      <div id="palette">
+        <span id="palette-black" class="palette-color circle"></span>
+        <span id="palette-gray" class="palette-color circle"></span>
+        <span id="palette-blue" class="palette-color circle"></span>
+        <span id="palette-green" class="palette-color circle"></span>
+        <span id="palette-red" class="palette-color circle"></span>
+        <span id="palette-orange" class="palette-color circle"></span>
+        <span id="palette-yellow" class="palette-color circle"></span>
+        <span id="palette-white" class="palette-color circle"></span>
+      </div>
+    </div>
+    <div id="brush-size">
+      <div class="circle"></div>
+    </div>
+    <div id="brush-adjuster">
+      <input value="1" type="range" max="50" min="1" orient="vertical"/>
+    </div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas width="1080px" height="720px" id="whiteboard"></canvas>
+  </div>
+
+  <div class="admin-tools">
+    <div id="user-profile">
+      <img class="user-profile-picture" title="User" src="media/profile.jpg" />
+    </div>
+  </div>
+
 </div>
 </body>
 

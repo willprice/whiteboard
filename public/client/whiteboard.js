@@ -7,13 +7,20 @@ class Whiteboard {
     this.canvas = canvasElement
     this.context = canvasElement.getContext('2d')
 
+    this.currentPath = null
+    this.currentColor = 'black'
+    this.currentLineWidth = 1
     this.drawing = false
     this.paths = []
   }
 
   startNewPath (event) {
     this.drawing = true
-    this.paths.unshift(new Path())
+    let path = new Path()
+    path.setColor(this.currentColor)
+    path.setWidth(this.currentLineWidth)
+    this.paths.unshift(path)
+    this.currentPath = path
     this.updatePath(event)
   }
 
@@ -27,15 +34,18 @@ class Whiteboard {
 
   endPath () {
     this.drawing = false
+    this.currentPath = null
   }
 
   setColor (color) {
-    this.context.strokeStyle = color
+    this.currentColor = color
+    if (this.currentPath !== null) {
+      this.currentPath.setColor(this.currentColor)
+    }
   }
 
   setStrokeSize (size) {
-    console.log(size)
-    this.context.lineWidth = size
+    this.currentLineWidth = size
   }
 
   setupCallbacks () {
@@ -44,11 +54,24 @@ class Whiteboard {
     this.canvas.addEventListener('mouseup', this.endPath.bind(this))
     this.canvas.addEventListener('mouseout', this.endPath.bind(this))
 
-    let colors = ['black', 'gray', 'blue', 'green', 'yellow', 'orange', 'red']
+    let colors = ['black', 'gray', 'blue', 'green', 'yellow', 'orange', 'red', 'white']
+    let currentColor = document.getElementById('palette-black')
+
     colors.map((color) => {
-      document.getElementById('palette-' + color).addEventListener('click', this.setColor.bind(this, color))
+      document.getElementById('palette-' + color).addEventListener('click', (event) => {
+        this.setColor(color)
+        currentColor.style.width = '20px'
+        currentColor.style.height = '20px'
+        document.querySelector('#brush-size > .circle').style.background = color
+
+        currentColor = event.target
+        currentColor.style.height = '30px'
+        currentColor.style.width = '30px'
+      })
     })
-    document.getElementById('brush-size').addEventListener('change', (event) => {
+    document.getElementById('brush-adjuster').addEventListener('change', (event) => {
+      document.querySelector('#brush-size > .circle').style.width = event.target.value.toString() + 'px'
+      document.querySelector('#brush-size > .circle').style.height = event.target.value.toString() + 'px'
       this.setStrokeSize(parseInt(event.target.value))
     })
   }

@@ -1,26 +1,122 @@
 header {
-    font-family: Arial;
-    font-style: oblique;
+    font-family: "Amatic SC", cursive;
     text-align: center;
     margin: 0 auto;
 }
-#whiteboard {
-    margin: 0 auto;
+
+#whiteboard-container {
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    margin: 10px auto;
+    height: 70px;
+    clear: left;
+}
+#user-profile {
+    margin: 10px;
+}
+#user-profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%/50%;
+    border: 1px solid #222;
+}
+
+.admin-tools {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    opacity: 0;
+    transition: 0.2s;
+    border-left-style: inset;
+    border-left-color: #333;
+    border-left-width: thin;
+}
+.admin-tools:hover {
+    opacity: 1;
+}
+
+.user-name {
+    float: right;
+    font-family: "DejaVu Sans";
+    padding: 0px 10px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+}
+
+
+canvas#whiteboard {
     border: 1px solid black;
 }
 
+.canvas-container {
+    width: 960px;
+    margin: auto;
+}
 
-#palette > li {
-    list-style-type: none;
+.sidebar-tools {
+    width: 80px;
+    opacity: 0;
+    transition: 0.2s;
+    border-right-style: inset;
+    border-right-color: #333;
+    border-right-width: thin;
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 50px;
+    height: 100%;
+}
+
+.sidebar-tools:hover {
+    opacity: 1;
+}
+
+#brush-size {
+    height: 80px;
+}
+
+#brush-size .circle {
+    margin: auto;
+}
+
+#brush-adjuster {
+    margin: 0 auto;
+}
+
+#brush-adjuster input {
+    /* vertical slider*/
+    width: 30px;
+    height: 100px;
+    writing-mode: bt-lr; /* IE vertical slider */
+    -webkit-appearance: slider-vertical; /* WebKit vertical slider */
+    margin: auto;
+}
+#palette {
+    display: flex;
+    flex-direction: column;
+    margin: 80px auto;
+    padding: 0px;
+    width: 100%;
 }
 
 .circle {
+    border: 1px solid black;
     border-radius: 50%/50%;
     width: 20px;
     height: 20px;
 }
+
 .palette-color {
-    margin: 5px 5px 0px 5px;
+    margin: 5px auto;
 }
 
 #palette-black {
@@ -44,4 +140,8 @@ header {
 
 #palette-yellow {
     background: yellow;
+}
+
+#palette-white {
+    background: white;
 }

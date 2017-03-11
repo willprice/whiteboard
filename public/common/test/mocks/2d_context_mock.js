@@ -8,7 +8,9 @@ function mockContext () {
     beginPath: sinon.spy(),
     closePath: sinon.spy(),
     lineTo: sinon.spy(),
-    stroke: sinon.spy()
+    stroke: sinon.spy(),
+    strokeStyle: 'black',
+    lineWidth: 1
   }
 }
 

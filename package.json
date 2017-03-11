@@ -31,6 +31,8 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "mocha-webpack --webpack-config webpack.config.js \"public/**/*.spec.js\""
+    "test": "mocha-webpack --webpack-config webpack.config.js \"public/**/*.spec.js\"",
+    "postinstall": "npm run bundle",
+    "bundle": "./node_modules/.bin/webpack"
   }
 }

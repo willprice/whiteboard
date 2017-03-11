@@ -1,5 +1,6 @@
 'use safe'
 // Inspired by "https://github.com/christianalfoni/webpack-express-boilerplate"
+/* globals: process */
 
 const path = require('path')
 const express = require('express')
@@ -11,6 +12,11 @@ const log = bunyan.createLogger({name: 'collaboard'})
 const port = process.env.PORT || 3000
 const app = express()
 
+const ROOT_DIR = path.join(__dirname, '..')
+const dirs = {
+  public: path.join(ROOT_DIR, 'public')
+}
+
 if (inDevelopment) {
   const webpack = require('webpack')
   const webpackConfig = require('../webpack.config.js')
@@ -21,16 +27,18 @@ if (inDevelopment) {
     noInfo: true
   }))
 
-  app.use(express.static('public'))
+  app.use(express.static(dirs.public))
 
   const livereload = require('livereload')
   let lrserver = livereload.createServer()
-  lrserver.watch(path.join(__dirname, 'public'))
+  lrserver.watch(dirs.public)
+} else {
+  app.use(express.static(dirs.public))
 }
 
 app.get('/', (request, response) => {
   response.type('xhtml')
-  ejs.renderFile('public/index.ejs', {}, {}, (err, str) => {
+  ejs.renderFile(path.join(dirs.public, 'index.ejs'), {}, {}, (err, str) => {
     if (err) {
       log.error(err)
     }

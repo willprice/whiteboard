@@ -1,0 +1,27 @@
+.admin-tools {
+    min-height: 100%; /* Force to be full height of parent */
+    display: flex;
+    flex-direction: column;
+
+    border-left-style: inset;
+    border-left-color: #333;
+    border-left-width: thin;
+}
+
+.admin-tools nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-tools nav a:first-child {
+    border-top: dotted 1px;
+}
+
+.admin-tools nav a {
+    color: black;
+    display: block;
+    text-align: center;
+    padding: 0.2em;
+    border-bottom: dotted 1px;
+}
+

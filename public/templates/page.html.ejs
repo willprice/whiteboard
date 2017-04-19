@@ -4,32 +4,25 @@
     <meta charset="UTF-8">
     <title><%= title%></title>
 
-    <link rel="stylesheet" type="text/css" href="styles/style.css"/>
-    <link rel="stylesheet" type="text/css" href="styles/modal.css"/>
-    <% for(var i=0; i < stylesheets.length; i++) { -%>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/helpers.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/modal-overlay.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/site-footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/site-header.css"/>
+    <% for(let i=0; i < stylesheets.length; i++) { -%>
     <link rel="stylesheet" type="text/css" href="<%= stylesheets[i] %>"/>
     <% } -%>
 
-    <% for(var i=0; i < scripts.length; i++) { -%>
-    <link rel="stylesheet" type="text/css" href="<%= scripts[i] %>"/>
+    <% for(let i=0; i < scripts.length; i++) { -%>
+    <script type="text/javascript" src="<%= scripts[i] %>"></script>
     <% } -%>
-
 </head>
 <body>
 
-<header>
-    <img src="../media/logo.svg" alt="CollaBoard logo"/>
-</header>
+<%- include("../partials/site-header.html.ejs") %>
 <%- include("../partials/" + page, pageLocals) %>
-<footer>
-    <nav class="horizontal-nav">
-        <a href="/report">About</a>
-        <a href="/tutorial">Tutorial</a>
-        <a href="/report">WebTech Report</a>
-        <a href="http://willprice.org">Author</a>
-    </nav>
-</footer>
-
-<%- include("modal.html.ejs") %>
+<%- include("../partials/site-footer.html.ejs") %>
+<%- include("../partials/modal-overlay.html.ejs") %>
 </body>
 </html>

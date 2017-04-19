@@ -1,4 +1,4 @@
-.modal-background {
+.modal-overlay {
     /* By default the modal isn't displayed, this is toggled in JS */
     display: none;
     position: fixed;
@@ -10,7 +10,7 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-container {
+.modal-overlay > .modal {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 1em;
@@ -19,21 +19,22 @@
     min-height: 3em;
 }
 
-footer.modal {
-    content: "footer";
-}
-
-header.modal {
+.titlebar {
     display: flex;
 }
 
-header.modal > .close {
+.titlebar > .title {
+
+}
+
+.titlebar > .close {
     color: #aaa;
     float: right;
 }
 
-header.modal > .close:hover,
-header.modal > .close:focus {
+.titlebar > .close:hover,
+
+.titlebar > .close:focus {
     color: black;
     cursor: pointer;
 }

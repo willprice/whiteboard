@@ -1,0 +1,15 @@
+.brush-tools {
+    min-height: 100%; /* Force to be full height of parent */
+    width: 80px;
+    border-right-style: inset;
+    border-right-color: #333;
+    border-right-width: thin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+.brush-tools > .currentbrush {
+    margin: auto;
+}

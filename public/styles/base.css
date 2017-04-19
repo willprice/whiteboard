@@ -1,0 +1,62 @@
+/*
+This defines the site wide styles that apply a unified theme overriding
+normalise.css styles (https://necolas.github.io/normalize.css/)
+
+Styles in this file should not use class selectors, these are meant to
+be sane defaults that make sense in any use of the styled tag. That means
+when writing a style in this file, consider whether the style will look good
+for all occurences of the tag on the site (ignoring components).
+*/
+
+/* TABLES */
+
+@import "/styles/colors.css";
+
+a:hover {
+    color: var(--color-1-light);
+}
+a:visited {
+    color: var(--color-1);
+}
+body {
+    margin: 0;
+}
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    border-bottom: 3px double #aaa;
+}
+
+tfoot {
+    border-top: 3px double #aaa;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+td {
+    padding: 0.5em;
+    margin: 1em;
+}
+
+td ul {
+    /* reset margin for ul, too much padding inside a cell otherwise */
+    margin: 0;
+}
+
+/* HEADERS */
+
+h1 {
+    text-align: center;
+    border-bottom: 1px dotted #aaa;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.body-content {
+    width: 960px;
+    margin: auto;
+}

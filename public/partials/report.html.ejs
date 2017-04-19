@@ -1,28 +1,64 @@
-<div class="container">
+<div class="body-content">
     <h1>CollaBoard Report (wp13824)</h1>
-    <div class="center">
-        <img src="http://68.media.tumblr.com/tumblr_lrbu1l9BJk1qgzxcao1_250.gif" alt="NyanCat">
-    </div>
-
-    <p><a href="https://collaborative-whiteboard.herokuapp.com/">CollaBoard</a> is a collaborative whiteboard tool
-    </p>
+    <p><a href="https://collaborative-whiteboard.herokuapp.com/">CollaBoard</a> is a collaborative whiteboard tool</p>
 
     <p>NOTE: The collaborative aspect is still in progress and hasn't been implemented yet</p>
     <p><a href="https://www.cs.bris.ac.uk/Teaching/Resources/COMSM0104/cw/assign5/">Marking guidelines</a></p>
 
     <section>
         <h1>HTML</h1>
-        <p>The website </p>
+        <p>The website is written in exclusively in HTML5, sadly not XHTML5 (as I agree that XHTML is a good idea)
+            due to the use of the Google sign-in JS API that injects HTML valid in HTML5, but not in XHTML.</p>
         <h2>Resources used</h2>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en/docs/Web/HTML">MDN HTML reference</a></li>
+            <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
+        </ul>
     </section>
     <section>
         <h1>CSS</h1>
         <h2>Resources used</h2>
-        <p>CSSed all the things</p>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS reference</a></li>
+            <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
+        </ul>
+        <p>CSS</p>
+        <h2>Points of note</h2>
+        <p>The cascade in CSS can be a monstrosity, and I believe it's a fundamentally flawed styling, to begin with
+            sites starting small are pleasant to develop when making use of the cascade, but as time passes and a
+            site grows then you start to experience situations like in this video...
+        </p>
+        <div class="_center-container">
+        <video class="_centered" src="https://video.twimg.com/tweet_video/C9oiOtjVYAIvk-5.mp4" controls
+               autoplay
+        loop></video>
+        </div>
+        <p>
+            Trying to style one aspect of a page can become monumentally frustrating by
+        </p>
+        <p>Current I favour the <a href="getbem.com/">BEM</a> methodology as it forces the use of CSS to style
+            components, completely avoiding the use of the cascade, when
+            <a href="https://www.webcomponents.org/">Web components</a> are implemented by the major browsers I
+            intend to switch to them instead; I believe components should consist of JS/HTML/CSS bundled all
+            together, quite the opposite of the philosophy outlined in the lectures. This opinion applies
+            strictly to rich webapps because we're bending HTML into a tool for something very different from its
+            original purpose it makes sense to step back and think "do these practices apply to this (webapp) style of
+            development?", there is no progressive enhancement in my app; you either have <code>canvas</code> support
+            (in which case you're using a modern browser), or you don't.
+        </p>
+        <p>As the delightful
+            <a href="https://csswizardry .com/2015/03/more-transparent-ui-code-with-namespaces/">Harry Roberts</a>
+            says "...because writing CSS is easy; looking after it is not.", I want components, not a tightly coupled
+            mess of styling.
+        </p>
     </section>
     <section>
         <h1>JS</h1>
         <h2>Resources used</h2>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN JS reference</a></li>
+            <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
+        </ul>
         <p>
             Used every framework: monogo/mean/js/express ALL OF THEM
         </p>
@@ -230,8 +266,8 @@
             </tr>
             <tr>
                 <td>Dynamic pages</td>
-                <td>D</td>
-                <td>5</td>
+                <td>A</td>
+                <td>7</td>
                 <td>
                     <ul>
                         <li>C means you've created a simple dynamic delivery system or you have used a
@@ -263,7 +299,7 @@
             <tfoot>
             <tr>
                 <td>-</td>
-                <td>47/120</td>
+                <td>49/120</td>
                 <td>-</td>
                 <td>-</td>
             </tr>

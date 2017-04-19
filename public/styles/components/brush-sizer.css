@@ -1,0 +1,13 @@
+.brush-sizer {
+    height: 80px;
+    margin: 1em auto;
+}
+
+.brush-sizer input {
+    width: 30px;
+    height: 100px;
+    /* vertical slider*/
+    writing-mode: bt-lr;                 /* IE vertical slider */
+    -webkit-appearance: slider-vertical; /* WebKit vertical slider */
+}
+

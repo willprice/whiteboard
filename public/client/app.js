@@ -1,18 +1,16 @@
 'use strict'
-/* global gapi */
 import Whiteboard from './whiteboard'
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  let whiteboardCanvas = document.getElementById('whiteboard')
-  const whiteboard = new Whiteboard(whiteboardCanvas)
+  let whiteboardCanvas = document.getElementsByClassName('whiteboard')
+  console.log(whiteboardCanvas)
+  const whiteboard = new Whiteboard(whiteboardCanvas.item(0))
   whiteboard.setupCallbacks()
-
-  document.getElementById('sign-out').addEventListener('click', signOut)
 })
 
-function signOut () {
-  let auth2 = gapi.auth2.getAuthInstance()
-  auth2.signOut().then(() => {
-    console.log('User signed out.')
-  })
-}
+// function signOut () {
+//   let auth2 = gapi.auth2.getAuthInstance()
+//   auth2.signOut().then(() => {
+//     console.log('User signed out.')
+//   })
+// }

@@ -1,0 +1,15 @@
+@import "styles/colors.css";
+
+.site-footer {
+    width: 100%;
+    background-color: var(--color-2-light);
+}
+.site-footer > nav {
+    min-height: 3em;
+    margin: auto;
+    display: flex;
+}
+.site-footer a {
+    padding: 0.2em;
+    text-align: center;
+}

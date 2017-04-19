@@ -15,13 +15,20 @@ const STATIC_PAGES_DEFINITIONS = {
 
   '/whiteboard': {
     title: 'CollaBoard App',
-    page: 'whiteboard.html.ejs',
+    page: 'components/whiteboard.html.ejs',
     pageLocals: {},
     scripts: [
-      'build/whiteboard.js'
+      '/build/whiteboard.js'
     ],
     stylesheets: [
-      'build/whiteboard.js'
+      '/styles/components/admin-tools.css',
+      '/styles/components/brush-icon.css',
+      '/styles/components/brush-sizer.css',
+      '/styles/components/brush-tools.css',
+      '/styles/components/color-palette.css',
+      '/styles/components/user-icon.css',
+      '/styles/components/whiteboard-app.css',
+      '/styles/components/whiteboard-canvas.css'
     ]
   },
 

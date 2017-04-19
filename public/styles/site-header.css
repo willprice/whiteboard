@@ -1,0 +1,8 @@
+@import "styles/colors.css";
+
+.site-header {
+    display: flex;
+    background: var(--color-2-light);
+    padding: 1em;
+    justify-content: space-around;
+}

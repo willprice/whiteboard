@@ -1,0 +1,46 @@
+    <title>CollaBoard</title>
+    <link rel="stylesheet" type="text/css" href="../styles/whiteboard.css"/>
+    <link rel="stylesheet" type="text/css" href="../styles/modal.css"/>
+    <script src="../build/whiteboard.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+          content="1080962885687-op3jt6mapaephh7n0a03g56lafc377fr.apps.googleusercontent.com">
+
+<div id="whiteboard-container">
+    <div class="sidebar-tools">
+        <div id="palette-container">
+            <div id="palette">
+                <span id="palette-black" class="palette-color circle"></span>
+                <span id="palette-gray" class="palette-color circle"></span>
+                <span id="palette-blue" class="palette-color circle"></span>
+                <span id="palette-green" class="palette-color circle"></span>
+                <span id="palette-red" class="palette-color circle"></span>
+                <span id="palette-orange" class="palette-color circle"></span>
+                <span id="palette-yellow" class="palette-color circle"></span>
+                <span id="palette-white" class="palette-color circle"></span>
+            </div>
+        </div>
+        <div id="brush-size">
+            <div class="circle"></div>
+        </div>
+        <div id="brush-adjuster">
+            <input value="1" type="range" max="50" min="1" orient="vertical"/>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+        <canvas width="1080px" height="720px" id="whiteboard"></canvas>
+    </div>
+
+    <div class="admin-tools">
+        <div id="user-profile">
+            <img class="user-profile-picture" title="User" src="../media/profile.jpg"/>
+        </div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <a href="#" onclick="signOut()">Sign out</a>
+        <nav>
+            <a href="#">Save</a>
+            <a href="/gallery">Gallery</a>
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+/*
+This defines the site wide styles that apply a unified theme
+ */
+
+.body {
+    width: 100%;
+}
+
+.container {
+    width: 960px;
+    margin: auto;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    border-bottom: 3px double #aaa;
+}
+
+td {
+    padding: 0.5em;
+}
+
+td ul {
+    margin: 0;
+    padding-left: 1em;
+}
+
+td {
+    margin: 1em;
+}
+
+tfoot {
+    border-top: 3px double #aaa;
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 1px dotted #aaa;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.center {
+    text-align: center;
+    margin: 0 auto;
+}

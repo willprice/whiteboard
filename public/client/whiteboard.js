@@ -49,10 +49,22 @@ class Whiteboard {
   }
 
   setupCallbacks () {
-    this.canvas.addEventListener('mousedown', this.startNewPath.bind(this))
-    this.canvas.addEventListener('mousemove', this.updatePath.bind(this))
-    this.canvas.addEventListener('mouseup', this.endPath.bind(this))
-    this.canvas.addEventListener('mouseout', this.endPath.bind(this))
+    function newPathEventCallback (event) {
+      this.startNewPath(event)
+      event.preventDefault()
+    }
+    function updatePathEventCallback (event) {
+      this.updatePath(event)
+      event.preventDefault()
+    }
+    function endPathEventCallback (event) {
+      this.endPath(event)
+      event.preventDefault()
+    }
+    this.canvas.addEventListener('mousedown', newPathEventCallback.bind(this))
+    this.canvas.addEventListener('mousemove', updatePathEventCallback.bind(this))
+    this.canvas.addEventListener('mouseup', endPathEventCallback.bind(this))
+    this.canvas.addEventListener('mouseout', endPathEventCallback.bind(this))
 
     let colors = ['black', 'gray', 'blue', 'green', 'yellow', 'orange', 'red', 'white']
     let currentColor = document.getElementById('palette-black')

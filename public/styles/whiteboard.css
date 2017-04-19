@@ -76,6 +76,22 @@ canvas#whiteboard {
     height: 100%;
 }
 
+.admin-tools nav {
+    display: flex;
+    flex-direction: column;
+}
+.admin-tools nav a:first-child {
+    border-top: dotted 1px;
+
+}
+.admin-tools nav a {
+    color: black;
+    display: block;
+    text-align: center;
+    padding: 0.2em;
+    border-bottom: dotted 1px;
+}
+
 .sidebar-tools:hover {
     opacity: 1;
 }
@@ -100,13 +116,6 @@ canvas#whiteboard {
     -webkit-appearance: slider-vertical; /* WebKit vertical slider */
     margin: auto;
 }
-#palette {
-    display: flex;
-    flex-direction: column;
-    margin: 80px auto;
-    padding: 0px;
-    width: 100%;
-}
 
 .circle {
     border: 1px solid black;
@@ -115,10 +124,16 @@ canvas#whiteboard {
     height: 20px;
 }
 
+#palette {
+    display: flex;
+    flex-direction: column;
+    margin: 80px auto;
+    padding: 0px;
+    width: 100%;
+}
 .palette-color {
     margin: 5px auto;
 }
-
 #palette-black {
     background: black;
 }
@@ -137,11 +152,9 @@ canvas#whiteboard {
 #palette-red {
     background: red;
 }
-
 #palette-yellow {
     background: yellow;
 }
-
 #palette-white {
     background: white;
 }

@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS boards (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE IF NOT EXISTS paths (
+    id INTEGER NOT NULL PRIMARY KEY,
+    board_id INTEGER NOT NULL,
+    FOREIGN KEY (board_id) REFERENCES boards(id)
+);
+
+CREATE TABLE IF NOT EXISTS points (
+    id INTEGER NOT NULL PRIMARY KEY,
+    x INTEGER NOT NULL,
+    y INTEGER NOT NULL,
+    path_id INTEGER NOT NULL,
+    FOREIGN KEY (path_id) references paths(id)
+);
+

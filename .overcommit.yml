@@ -11,7 +11,7 @@
 PrePush:
   TestUnit:
     enabled: true
-    command: npm test
+    command: ['npm', 'test']
 PreCommit:
   Standard:
     enabled: true

@@ -8,4 +8,4 @@ A web app for collaborative editing of a virtual whiteboard.
 
 ## Example deploy
 
-[Heroku Instance](https://collaborative-whiteboard.hero…)
+[Heroku Instance](https://collaborative-whiteboard.herokuapp.com/)

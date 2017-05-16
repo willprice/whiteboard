@@ -1,0 +1,1 @@
+(c) Copyright 2016 Will Price, all rights reserved.

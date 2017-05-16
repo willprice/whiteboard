@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/willprice/whiteboard",
   "author": "Will Price",
-  "license": "GPLv3",
+  "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
     "bunyan": "^1.8.5",
     "ejs": "^2.5.6",

@@ -64,8 +64,9 @@ function genStaticPageHandler (pageDefinition, masterPageTemplate) {
   }
 }
 
-function staticPages (app, masterPageTemplate) {
+function staticPages (app, sitemap, masterPageTemplate) {
   for (let route in STATIC_PAGES_DEFINITIONS) {
+    sitemap.add({url: route})
     let pageDefinition = STATIC_PAGES_DEFINITIONS[route]
     let pageHandler = genStaticPageHandler(pageDefinition, masterPageTemplate)
     app.get(route, pageHandler)

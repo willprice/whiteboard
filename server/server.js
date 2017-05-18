@@ -8,6 +8,7 @@ const ejs = require('ejs')
 const bunyan = require('bunyan')
 const bodyParser = require('body-parser')
 const sqlite3 = require('sqlite3').verbose()
+const sm = require('sitemap')
 const fs = require('fs')
 
 const DB_SCHEMA = require('./schema')
@@ -64,8 +65,22 @@ const masterPageTemplatePath = path.join(dirs.templates, 'page.html.ejs')
 const masterPageTemplateString = fs.readFileSync(masterPageTemplatePath, 'utf8')
 const masterPageTemplate = ejs.compile(masterPageTemplateString, { filename: masterPageTemplatePath })
 
+const sitemap = sm.createSitemap({
+  hostname: `http://${host}:${port}`
+})
+
 const staticPages = require('./pages')
-staticPages(app, masterPageTemplate)
+staticPages(app, sitemap, masterPageTemplate)
+
+app.get('/sitemap.xml', (request, response) => {
+  sitemap.toXML((error, xml) => {
+    if (error) {
+      return response.status(500).end()
+    }
+    response.header('Content-Type', 'application/xml')
+    response.send(xml)
+  })
+})
 
 app.get('/api/board/:boardId', (request, response) => {
   response.type('html')

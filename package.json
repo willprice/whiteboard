@@ -28,9 +28,16 @@
     "mocha": "^3.2.0",
     "mocha-webpack": "^0.7.0",
     "nodemon": "^1.11.0",
+    "request": "^2.81.0",
     "sinon": "^2.0.0-pre.6",
+    "supertest": "^3.0.0",
+    "validator-nu": "^2.2.2",
+    "vnu-jar": "^17.3.0",
     "webpack-dev-middleware": "^1.10.1",
-    "webpack-hot-middleware": "^2.17.1"
+    "webpack-hot-middleware": "^2.17.1",
+    "xml2js": "^0.4.17",
+    "xmldom": "^0.1.27",
+    "xpath": "^0.0.24"
   },
   "scripts": {
     "start": "node server/server.js",

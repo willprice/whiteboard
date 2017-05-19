@@ -1,4 +1,25 @@
-language: node_js
-node_js:
-  - node
-  - "6"
+# We use java so that we get access to JDK 8 which is
+# necessary to run the HTML validation npm task
+language: java
+cache: yarn
+env:
+  - NODE_VERSION=7
+  - NODE_VERSION=6
+addons:
+  apt:
+    packages:
+      -
+jdk:
+  - oraclejdk8
+before_install:
+  - nvm install $NODE_VERSION
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+before_script:
+  - $HOME/.yarn/bin/yarn
+script:
+  - npm test
+  - npm run validate-html
+
+notifcations:
+  email:
+    on_success: never

@@ -8,4 +8,8 @@ function localiseClick (obj, clickX, clickY) {
   return new Point(xRelativeToObj, yRelativeToObj)
 }
 
-export { localiseClick }
+function toPx (integer) {
+  return integer.toString() + 'px'
+}
+
+export { localiseClick, toPx }

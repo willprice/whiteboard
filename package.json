@@ -41,7 +41,10 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "mocha-webpack --webpack-config webpack.config.js \"public/**/*.spec.js\"",
+    "test": "npm run unittest; npm run validate-html",
+    "unittest": "npm run unittest-common",
+    "unittest-common": "mocha-webpack --webpack-config webpack.config.js \"public/**/*.spec.js\"",
+    "validate-html": "node server/validate_html.spec.js",
     "postinstall": "npm run bundle",
     "bundle": "./node_modules/.bin/webpack"
   }

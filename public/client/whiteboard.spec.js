@@ -3,16 +3,12 @@
 
 import chai from 'chai'
 import Whiteboard from './whiteboard'
-import mockContext from 'common/test/mocks/2d_context_mock'
 const assert = chai.assert
 
 describe('Whiteboard', () => {
-  let stubCanvas = {
-    getContext: (type) => mockContext()
-  }
   describe('Path color', () => {
     it('sets the color of the current path', () => {
-      let whiteboard = new Whiteboard(stubCanvas)
+      let whiteboard = new Whiteboard()
 
       whiteboard.startNewPath({
         pageX: 50,
@@ -28,7 +24,7 @@ describe('Whiteboard', () => {
     })
 
     it('sets the color of a new path', () => {
-      let whiteboard = new Whiteboard(stubCanvas)
+      let whiteboard = new Whiteboard()
       whiteboard.setColor('#fff')
       whiteboard.startNewPath({
         pageX: 50,
@@ -44,9 +40,9 @@ describe('Whiteboard', () => {
 
   describe('Path width', () => {
     it('sets the width of the next path', () => {
-      let whiteboard = new Whiteboard(stubCanvas)
+      let whiteboard = new Whiteboard()
 
-      whiteboard.setStrokeSize(5)
+      whiteboard.brushTools.setStrokeSize(5)
       whiteboard.startNewPath({
         pageX: 50,
         pageY: 50,

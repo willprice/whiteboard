@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "npm run unittest; npm run validate-html",
+    "test": "npm run unittest",
     "unittest": "npm run unittest-common",
     "unittest-common": "mocha-webpack --webpack-config webpack.config.js \"public/**/*.spec.js\"",
     "validate-html": "node server/validate_html.spec.js",

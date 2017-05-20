@@ -1,0 +1,22 @@
+.whiteboard-tools {
+    display: flex;
+    flex-direction: column;
+}
+
+.whiteboard-tools__button {
+    display: block;
+    text-align: center;
+    padding: 0.2em;
+    border-bottom: dotted 1px;
+    background-color: #FFD5B2;
+}
+
+.whiteboard-tools__button:hover {
+    background-color: #00447E;
+    color: #fefefe;
+}
+
+.whiteboard-tools__button:first-child {
+    border-top: dotted 1px;
+}
+

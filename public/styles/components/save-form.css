@@ -1,0 +1,9 @@
+.save-form__button--save {
+    float: right;
+}
+
+.save-form__field {
+    display: block;
+    margin-bottom: 1em;
+    width: 300px;
+}

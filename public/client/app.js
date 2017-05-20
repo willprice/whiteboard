@@ -1,12 +1,14 @@
 'use strict'
 import WhiteboardUI from './ui/whiteboard_ui'
+import AdminToolsUI from './ui/whiteboard-tools'
 import Whiteboard from './whiteboard'
 
 document.addEventListener('DOMContentLoaded', () => {
-  let whiteboardCanvasElement = document.querySelector('.whiteboard-app')
   const whiteboard = new Whiteboard()
   // eslint-disable-next-line
-  const whiteboardUI = new WhiteboardUI(whiteboardCanvasElement, whiteboard)
+  const whiteboardUI = new WhiteboardUI(document.querySelector('.whiteboard-app'), whiteboard)
+  // eslint-disable-next-line
+  const whiteboardTools = new AdminToolsUI(document.querySelector('.whiteboard-tools'))
 })
 
 // function signOut () {

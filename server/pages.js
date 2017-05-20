@@ -26,9 +26,12 @@ const STATIC_PAGES_DEFINITIONS = {
       '/styles/components/brush-sizer.css',
       '/styles/components/brush-tools.css',
       '/styles/components/color-palette.css',
+      '/styles/components/drop-down.css',
+      '/styles/components/save-form.css',
       '/styles/components/user-icon.css',
       '/styles/components/whiteboard-app.css',
-      '/styles/components/whiteboard-canvas.css'
+      '/styles/components/whiteboard-canvas.css',
+      '/styles/components/whiteboard-tools.css'
     ]
   },
 

@@ -6,6 +6,9 @@
   "repository": "https://github.com/willprice/whiteboard",
   "author": "Will Price",
   "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+      "node": "7.x"
+  },
   "dependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",

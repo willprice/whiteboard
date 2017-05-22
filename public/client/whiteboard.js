@@ -4,6 +4,7 @@ import BrushTools from './brushtools'
 
 class Whiteboard {
   constructor (paths = []) {
+    this.id = -1
     this.paths = paths
     this.brushTools = new BrushTools()
 

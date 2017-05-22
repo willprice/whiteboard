@@ -2,8 +2,8 @@
 /* global describe, it */
 
 import chai from 'chai'
-import Whiteboard from './whiteboard'
 const assert = chai.assert
+import Whiteboard from './whiteboard'
 
 describe('Whiteboard', () => {
   describe('Path color', () => {

@@ -1,6 +1,7 @@
 'use safe'
 // Inspired by "https://github.com/christianalfoni/webpack-express-boilerplate"
 
+const expressWs = require('express-ws')
 const path = require('path')
 const express = require('express')
 const ejs = require('ejs')
@@ -19,6 +20,7 @@ const log = bunyan.createLogger({name: 'collaboard'})
 
 const db = new sqlite3.Database('collaboard.db')
 const app = express()
+expressWs(app)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -78,6 +80,14 @@ app.get('/api/board/', (request, response) => {
       response.send('' + this.lastID)
     }
     response.end()
+  })
+})
+
+app.ws('/api/v1', (ws, request) => {
+  log.info('Websocket connected')
+  ws.on('message', (msg) => {
+    log.info('Received ws message')
+    log.info(msg)
   })
 })
 

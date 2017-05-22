@@ -8,8 +8,10 @@
     min-height: 3em;
     margin: auto;
     display: flex;
+    justify-content: center;
+    align-content: space-around;
 }
 .site-footer a {
-    padding: 0.2em;
+    padding: 1em;
     text-align: center;
 }

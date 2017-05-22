@@ -4,12 +4,13 @@ import BrushToolsUI from './brushtools_ui'
 class WhiteboardUI {
   constructor (element, whiteboard) {
     this.element = element
-    this.canvas = this.getCanvas(element)
+    this.canvas = this.getCanvas()
     this.context = this.canvas.getContext('2d')
     this.whiteboard = whiteboard
 
     this.brushToolsUI = new BrushToolsUI(element.querySelector('.brush-tools'), this.whiteboard)
     this.setupCallbacks()
+    this.resizeCanvas()
   }
 
   setupCallbacks () {
@@ -34,8 +35,21 @@ class WhiteboardUI {
     this.canvas.addEventListener('mouseout', endPathEventCallback.bind(this))
   }
 
-  getCanvas (element) {
-    return element.querySelector('.whiteboard-canvas--canvas')
+  resizeCanvas () {
+    let container = this.getCanvasContainer()
+    let newWidth = container.offsetWidth
+    let newHeight = container.offsetHeight
+
+    this.canvas.width = newWidth
+    this.canvas.height = newHeight
+  }
+
+  getCanvasContainer () {
+    return this.element.querySelector('.whiteboard-canvas')
+  }
+
+  getCanvas () {
+    return this.element.querySelector('.whiteboard-canvas--canvas')
   }
 
   startNewPath (event) {

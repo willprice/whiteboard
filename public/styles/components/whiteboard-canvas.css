@@ -1,14 +1,11 @@
 .whiteboard-canvas {
     width: 100%;
-    margin: 1em;
 }
 .whiteboard-canvas > .whiteboard {
     /* width/height have to be specified in CSS for margin
        and in HTML to initialize the HTML canvas context to the correct size
      */
     display: block; /* By default, canvas isn't a block, to center it we need to make it a block */
-    width: 1080px;
-    height: 720px;
     margin: auto;
     border: 1px solid black;
 }

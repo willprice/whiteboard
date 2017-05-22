@@ -5,13 +5,14 @@
     background-color: var(--color-2-light);
 }
 .site-footer > nav {
-    min-height: 3em;
+    min-height: 30px;
     margin: auto;
     display: flex;
     justify-content: center;
     align-content: space-around;
 }
 .site-footer a {
+    height: 30px;
     padding: 1em;
     text-align: center;
 }

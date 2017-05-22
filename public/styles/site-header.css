@@ -5,4 +5,5 @@
     background: var(--color-2-light);
     padding: 1em;
     justify-content: space-around;
+    height: 50px;
 }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/modal-overlay.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/site-footer.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/site-header.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/textual-content.css"/>
     <% for(let i=0; i < stylesheets.length; i++) { -%>
     <link rel="stylesheet" type="text/css" href="<%= stylesheets[i] %>"/>
     <% } -%>
@@ -21,7 +22,9 @@
 <body>
 
 <%- include("../partials/site-header.html.ejs") %>
+<div class="content">
 <%- include("../partials/" + page, pageLocals) %>
+</div>
 <%- include("../partials/site-footer.html.ejs") %>
 <%- include("../partials/modal-overlay.html.ejs") %>
 </body>

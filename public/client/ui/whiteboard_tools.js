@@ -20,6 +20,7 @@ class WhiteboardToolsUI {
 
     this.getSaveDialogCancelButton().addEventListener('click', this.hideSaveDialog.bind(this))
     this.getSaveDialogSaveButton().addEventListener('click', this.onSave.bind(this))
+    this.getSidebarGalleryButton().addEventListener('click', this.showGallery.bind(this))
   }
 
   getNameInputField () {
@@ -44,6 +45,10 @@ class WhiteboardToolsUI {
     return this.element.querySelector('.whiteboard-tools__save')
   }
 
+  getSidebarGalleryButton () {
+    return this.element.querySelector('.whiteboard-tools__gallery')
+  }
+
   updateName (event) {
     this.whiteboardSession.whiteboard.name = event.target.value
   }
@@ -51,6 +56,8 @@ class WhiteboardToolsUI {
   onSave () {
     this.whiteboardSession.save()
     this.hideSaveDialog()
+    this.getSidebarSaveButton().innerText = 'Update'
+    this.getSaveDialogSaveButton().innerText = 'Update'
   }
 
   updateTags (event) {
@@ -65,6 +72,9 @@ class WhiteboardToolsUI {
 
   showSaveDialog () {
     this.saveDialogElement.style.visibility = 'visible'
+  }
+
+  showGallery () {
   }
 }
 

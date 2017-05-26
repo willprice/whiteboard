@@ -10,7 +10,7 @@ const WhiteboardSession = require('./whiteboard_session')
 const WhiteboardAPI = require('./whiteboard_api')
 
 describe('WhiteboardSession', () => {
-  let api = sinon.createStubInstance(WhiteboardAPI)
+  let api = null
   let session = null
 
   before(() => {
@@ -22,13 +22,15 @@ describe('WhiteboardSession', () => {
   })
 
   beforeEach(() => {
+    api = sinon.createStubInstance(WhiteboardAPI)
+    api.newBoard.returns(new Promise((resolve) => resolve(1)))
+
     session = new WhiteboardSession(api)
-    api.save.returns(new Promise((resolve) => resolve(1)))
   })
 
-  it('creates a new whiteboard for an unsaved whiteboard on save', () => {
+  it('creates a new whiteboard for an unsaved whiteboard on newBoard', () => {
     return session.save().then(() => {
-      expect(api.save).to.be.calledWith(session.whiteboard)
+      expect(api.newBoard).to.be.calledWith(session.whiteboard)
     })
   })
 
@@ -38,6 +40,23 @@ describe('WhiteboardSession', () => {
     return session.save().then(() => {
       this.clock.tick(5000)
       expect(session.syncBoard).to.have.been.called
+    })
+  })
+
+  it('only requests a new board for the first invocation of save', () => {
+    return session.save().then(() => {
+      return session.save()
+    }).then(() => {
+      expect(api.newBoard).to.have.been.calledOnce
+    })
+  })
+
+  it('updates metadata on second invocation of save', () => {
+    return session.save().then(() => {
+      return session.save()
+    }).then(() => {
+      expect(api.updateMetadata).to.have.been.calledOnce
+      expect(api.updateMetadata).to.have.been.calledWith(session.whiteboard)
     })
   })
 

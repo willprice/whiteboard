@@ -11,7 +11,7 @@ app.use((req, res) => {
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 
-wss.on('socket', (ws) => {
+wss.on('connection', (ws) => {
   const location = url.parse(ws.upgradeReq.url, true)
   ws.on('message', (message) => {
     console.log('got message: %s', message)

@@ -1,0 +1,12 @@
+<div class="board-icon">
+    <div class="board-icon__field">{{name}}</div>
+    <div class="board-icon__field">
+        <% if (tags.length > 0) { -%>
+        <div class="board-icon__tags">
+            <% tags.forEach(function(tag) { -%>
+            <div class="board-icon__tag">{{tag}}</div>
+            <% }); -%>
+        </div>
+        <% } -%>
+    </div>
+</div>

@@ -6,17 +6,18 @@ class WhiteboardSession {
     this.api = api
     this.whiteboard = new Whiteboard()
     this.lastSyncedPathCount = 0
+    this.newBoard = true
     this.syncPeriod = 2000 // ms
-    this.syncing = false
   }
 
   save () {
-    return this.api.save(this.whiteboard).then(() => {
-      if (!this.syncing) {
+    if (this.newBoard) {
+      return this.api.newBoard(this.whiteboard).then(() => {
         setInterval(this.syncBoard.bind(this), this.syncPeriod)
-        this.syncing = true
-      }
-    })
+      }).then(() => { this.newBoard = false })
+    } else {
+      return this.api.updateMetadata(this.whiteboard)
+    }
   }
 
   syncBoard () {

@@ -30,9 +30,18 @@ class FakeWebSocket {
   }
 
   triggerEvent (event, ...args) {
+    let promises = []
     for (let callback of this.callbacks[event]) {
-      callback(...args)
+      let possiblePromise = callback(...args)
+      if (Promise.resolve(possiblePromise) === possiblePromise) {
+        promises.push(possiblePromise)
+      }
     }
+    return Promise.all(promises)
+  }
+
+  send (...args) {
+
   }
 }
 

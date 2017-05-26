@@ -34,9 +34,11 @@ class Whiteboard {
   }
 
   endPath () {
-    this.currentlyDrawing = false
-    this.paths.unshift(this.currentPath)
-    this.currentPath = null
+    if (this.currentlyDrawing) {
+      this.currentlyDrawing = false
+      this.paths.unshift(this.currentPath)
+      this.currentPath = null
+    }
   }
 
   addPaths (paths) {

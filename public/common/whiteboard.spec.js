@@ -33,12 +33,23 @@ describe('Whiteboard', () => {
     })
   })
 
-  it('Adds current path to paths when complete', () => {
-    let whiteboard = new Whiteboard()
+  describe('Ending path', () => {
+    it('Adds current path to paths when complete', () => {
+      let whiteboard = new Whiteboard()
 
-    let pathCount = whiteboard.paths.length
-    whiteboard.startNewPath()
-    whiteboard.endPath()
-    assert.equal(pathCount + 1, whiteboard.paths.length)
+      let pathCount = whiteboard.paths.length
+      whiteboard.startNewPath()
+      whiteboard.endPath()
+      assert.equal(pathCount + 1, whiteboard.paths.length)
+    })
+
+    it('Only adds the current path if one is being drawn', () => {
+      let whiteboard = new Whiteboard()
+
+      let pathCount = whiteboard.paths.length
+      whiteboard.endPath()
+
+      assert.equal(pathCount, whiteboard.paths.length)
+    })
   })
 })

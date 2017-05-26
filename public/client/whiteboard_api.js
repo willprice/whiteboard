@@ -1,10 +1,12 @@
 'use strict'
 
 class WhiteboardAPI {
-  constructor (connection, serialise, deserialise) {
-    this.socket = connection
-    this.serialise = serialise
-    this.deserialise = deserialise
+  /**
+   *
+   * @param {WebSocketConnection} connection
+   */
+  constructor (connection) {
+    this.connection = connection
   }
 
   /**
@@ -12,8 +14,8 @@ class WhiteboardAPI {
    * @param {Whiteboard} whiteboard
    * @returns {integer} id
    */
-  save (whiteboard) {
-    return this.socket.send('new_board', {
+  newBoard (whiteboard) {
+    return this.connection.send('new_board', {
       name: whiteboard.name,
       tags: whiteboard.tags
     }).then((id) => {
@@ -26,7 +28,7 @@ class WhiteboardAPI {
    * @param {Whiteboard} whiteboard
    */
   addPaths (paths) {
-    return this.socket.send('add_paths', paths)
+    return this.connection.send('add_paths', paths)
   }
 
   /**
@@ -35,11 +37,11 @@ class WhiteboardAPI {
    * @param description
    * @param tags
    */
-  updateMetadata (whiteboard, description, tags) {
-    return this.socket.send('update_board_metadata', {
+  updateMetadata (whiteboard) {
+    return this.connection.send('update_board_metadata', {
       id: whiteboard.id,
-      description: description,
-      tags: tags
+      name: whiteboard.name,
+      tags: whiteboard.tags
     })
   }
 
@@ -48,10 +50,8 @@ class WhiteboardAPI {
    * @return {Promise<Whiteboard>} whiteboard corresponding to id
    */
   fetchBoard (id) {
-    return this.socket.send('fetch_board', {
+    return this.connection.send('fetch_board', {
       id: id
-    }).then((serialisedWhiteboard) => {
-      return this.deserialise(serialisedWhiteboard)
     })
   }
 }

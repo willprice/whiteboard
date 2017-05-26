@@ -17,6 +17,10 @@ class Path {
     return this._color
   }
 
+  get length () {
+    return this.points.length
+  }
+
   set width (width) {
     this._width = width
   }

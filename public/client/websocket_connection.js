@@ -1,10 +1,13 @@
 'use strict'
 /* globals WebSocket */
+const serialisation = require('../common/serialisation')
+const serialise = serialisation.serialise
+const deserialise = serialisation.deserialise
 
 class WebsocketConnection {
   constructor (url) {
     this.url = url
-    this.socket = new WebSocket(url)
+    this.connection = new WebSocket(url)
     this.responsePromises = new Map()
     this.currentMessageId = 0
 
@@ -12,10 +15,10 @@ class WebsocketConnection {
   }
 
   _setupCallbacks () {
-    this.socket.addEventListener('open', this._onOpen.bind(this))
-    this.socket.addEventListener('message', this._onMessage.bind(this))
-    this.socket.addEventListener('close', this._onClose.bind(this))
-    this.socket.addEventListener('error', this._onError.bind(this))
+    this.connection.addEventListener('open', this._onOpen.bind(this))
+    this.connection.addEventListener('message', this._onMessage.bind(this))
+    this.connection.addEventListener('close', this._onClose.bind(this))
+    this.connection.addEventListener('error', this._onError.bind(this))
   }
 
   _nextMessageId () {
@@ -35,14 +38,14 @@ class WebsocketConnection {
   }
 
   _onMessage (event) {
-    let payload = JSON.parse(event.data)
+    let payload = deserialise(event.data)
     let id = payload.id
     this.responsePromises[id](payload.data)
   }
 
   send (command, data) {
     let id = this._nextMessageId()
-    this.socket.send(JSON.stringify({
+    this.connection.send(serialise({
       command: command,
       data: data,
       id: id

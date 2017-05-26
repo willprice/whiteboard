@@ -6,8 +6,7 @@ const WhiteboardToolsUI = require('./ui/whiteboard_tools')
 const WebSocketConnection = require('./websocket_connection')
 const WhiteboardAPI = require('./whiteboard_api')
 const WhiteboardSession = require('./whiteboard_session')
-const serialise = require('./serilialise').serialise
-const deserialise = require('./serilialise').deserialise
+const serialisationTools = require('../common/serialisation')
 
 function wsUrl () {
   return `ws://${location.host}/api/v1`
@@ -15,7 +14,7 @@ function wsUrl () {
 
 document.addEventListener('DOMContentLoaded', () => {
   const wsConnection = new WebSocketConnection(wsUrl())
-  const whiteboardApi = new WhiteboardAPI(wsConnection, serialise, deserialise)
+  const whiteboardApi = new WhiteboardAPI(wsConnection, serialisationTools.serialise, serialisationTools.deserialise)
   const whiteboardSession = new WhiteboardSession(whiteboardApi)
 
   // eslint-disable-next-line

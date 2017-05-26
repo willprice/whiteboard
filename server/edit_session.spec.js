@@ -16,26 +16,27 @@ describe('EditSession', () => {
   let boardRepo = null
   let editSession = null
   let wb = null
+  let owner = 'jonn'
 
   beforeEach(() => {
     boardRepo = sinon.createStubInstance(BoardRepository)
-    editSession = new EditSession(boardRepo)
+    editSession = new EditSession(boardRepo, owner)
     wb = boardMother.boardWithTriangles()
   })
 
   it('creates new board in db', () => {
-    boardRepo.create.returns(new Promise((resolve) => resolve(wb)))
+    boardRepo.create.resolves(wb)
 
-    return editSession.newBoard(wb.name, wb.tags).then(() => {
-      expect(boardRepo.create).to.have.been.calledWithExactly(wb.name, wb.tags)
+    return editSession.newBoard(wb.name, wb.tags, owner).then(() => {
+      expect(boardRepo.create).to.have.been.calledWithExactly(wb.name, wb.tags, owner)
     })
   })
 
   describe('addPaths', () => {
     it('appends new paths to board in db', () => {
       let id = 1
-      boardRepo.create.returns(new Promise((resolve) => resolve(new Whiteboard([], id, wb.name, wb.tags))))
-      boardRepo.appendPaths.returns(new Promise((resolve) => resolve()))
+      boardRepo.create.resolves(new Whiteboard([], id, wb.name, wb.tags))
+      boardRepo.appendPaths.resolves()
 
       return editSession.newBoard(wb.name, wb.tags).then(() => {
         return editSession.addPaths(wb.paths)
@@ -45,13 +46,27 @@ describe('EditSession', () => {
     })
 
     it('appends new paths to in memory board', () => {
-      boardRepo.create.returns(new Promise((resolve) => resolve(new Whiteboard([], 1, wb.name, wb.tags))))
-      boardRepo.appendPaths.returns(new Promise((resolve) => resolve()))
+      boardRepo.create.resolves(new Whiteboard([], 1, wb.name, wb.tags))
+      boardRepo.appendPaths.resolves()
 
       return editSession.newBoard(wb.name, wb.tags).then(() => {
         return editSession.addPaths(wb.paths)
       }).then(() => {
         expect(editSession.wb.paths).to.be.deep.equal(wb.paths)
+      })
+    })
+
+    it('lists all available whiteboards for user', () => {
+      let whiteboards = [
+        boardMother.boardWithTriangles({ name: 'WB1' }),
+        boardMother.boardWithTriangles({ name: 'WB2' })
+      ]
+      boardRepo.listBoards.resolves(whiteboards)
+
+      return editSession.listBoards().then((whiteboardsFromRepo) => {
+        expect(whiteboardsFromRepo).to.equal(whiteboards)
+      }).then(() => {
+        expect(boardRepo.listBoards).to.have.been.calledWith(owner)
       })
     })
   })

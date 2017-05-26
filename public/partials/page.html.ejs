@@ -12,6 +12,11 @@
     <link rel="stylesheet" type="text/css" href="/styles/site-footer.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/site-header.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/textual-content.css"/>
+    <% for (let templateName in inlineTemplates) { -%>
+    <script id="<%= templateName %>" type="text/template">
+    <%- inlineTemplates[templateName] %>
+    </script>
+    <% } -%>
     <% for(let i=0; i < stylesheets.length; i++) { -%>
     <link rel="stylesheet" type="text/css" href="<%= stylesheets[i] %>"/>
     <% } -%>

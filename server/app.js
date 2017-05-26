@@ -10,10 +10,13 @@ const bodyParser = require('body-parser')
 const sm = require('sitemap')
 const fs = require('fs')
 
+const WhiteboardWSController = require('./controllers/whiteboard_ws_controller')
+const BoardRepository = require('./repositories/board_repository')
+const EditSession = require('./edit_session')
+
 const config = require('./config')
 const dirs = config.dirs
 const staticPages = require('./pages')
-
 const log = bunyan.createLogger({name: 'collaboard'})
 
 const app = express()
@@ -80,14 +83,14 @@ app.get('/view-src/*', (request, response) => {
   }
 })
 
-app.ws('/api/v1', (ws, request) => {
-  log.info('WebSocket connected')
-  ws.on('message', (msg) => {
-    log.info('Received ws message')
-    log.info(msg)
-  })
-  ws.on('close', () => {
-    log.info('WebSocket closed')
+const sqlite = require('sqlite')
+sqlite.open(config.dbPath).then((db) => {
+  const boardRepo = new BoardRepository(db)
+
+  app.ws('/api/v1', (ws, request) => {
+    log.info('WebSocket connected')
+    const controller = new WhiteboardWSController(ws, new EditSession(boardRepo))
+    controller.listen()
   })
 })
 

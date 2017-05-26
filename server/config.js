@@ -11,6 +11,7 @@ const dirs = {
 
 module.exports = {
   dirs: dirs,
+  dbPath: 'collaboard.db',
   host: '0.0.0.0',
   port: process.env.PORT || 3000,
   protocol: 'http',

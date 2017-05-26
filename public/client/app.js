@@ -9,7 +9,18 @@ const WhiteboardSession = require('./whiteboard_session')
 const serialisationTools = require('../common/serialisation')
 
 function wsUrl () {
-  return `ws://${location.host}/api/v1`
+  let protocol = 'ws:'
+  switch (location.protocol) {
+    case 'https:':
+      protocol = 'wss:'
+      break
+    case 'http:':
+      protocol = 'ws:'
+      break
+    default:
+      protocol = 'ws:'
+  }
+  return `${protocol}//${location.host}/api/v1`
 }
 
 document.addEventListener('DOMContentLoaded', () => {

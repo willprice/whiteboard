@@ -83,6 +83,12 @@ function validatePage (validator, htmlBody) {
 }
 
 let validator = new vnu.Vnu(undefined, undefined, vnuJarPath)
+
+function closeServers () {
+  server.close()
+  validator.close()
+}
+
 validator
   .open()
   .then((pid) => {
@@ -94,5 +100,6 @@ validator
   .catch((error) => {
     console.log('Failed to build test suite due to error')
     console.log(error)
+    return closeServers()
   })
 

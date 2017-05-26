@@ -4,7 +4,11 @@
 
 A web app for collaborative editing of a virtual whiteboard.
 
-**WORK IN PROGRESS**, currently unusable.
+**WORK IN PROGRESS**, missing features
+
+## University submission
+
+Please see [SUBMISSION_README.md](./SUBMISSION_README.md)
 
 ## Example deploy
 

@@ -32,14 +32,26 @@
             the VNU HTML validator (the same as used by the W3C in their validation service). I wrote a node module
             to create a Mocha test-suite fetching each page specified in a remote sitemap.xml file, run the page
             through the VNU validator and report errors. I set up travis CI to run this script on git check-in to
-            ensure my site always remained HTML complaint if it wasn't it wouldn't be deployed to Heroku.</p>
+            ensure my site always remained HTML complaint if it wasn't it wouldn't be deployed to Heroku. Travis
+            test results can be found <a href="https://travis-ci.org/willprice/whiteboard">here</a> (look back
+            through the history to see some cases where it has picked up invalid HTML use!).</p>
 
         <h2>Templating</h2>
         <p>I chose to EJS for templating HTML. The use of templating is primarily to DRY up repetitious snippets of
             HTML. Pages are all included in a master page template that has a header and footer giving consistent
             branding to the website. The Head of the master page template is parameterised so that one can inject new
-            scripts and and stylesheets if so needed by pages.
+            scripts and and stylesheets if so needed by pages. I do also use EJS on the front end to create the
+            gallery of boards for a user, due to EJS's poor support for client side use, I ended up having to
+            serialise the raw templates on the backend and inject them into the HTML as script tags with type
+            <code>text/template</code> (which the browser ignores), I then can get a handle on them in my client side
+            JS and render them.
         </p>
+
+        <h2>Files of interest</h2>
+        <ul>
+            <li><a href="/view-src/server/validate_html.js">validate_html.js</a> - Dynamic test suite for HTML
+                validation based on sitemap.xml</li>
+        </ul>
 
         <h2>Resources used</h2>
         <ul>
@@ -51,7 +63,14 @@
 
     <section>
         <h1>CSS</h1>
-        <p>CSS</p>
+
+        <p>Pretty much all the CSS was written from the ground up. Following the BEM philosophy I isolate stylings
+            for specific components in their own files. I made heavy use of CSS3 features like flex-box and
+            border-radius.
+        </p>
+
+        <p>The slide-show styling takes significant inspiration from
+            <a href="https://www.w3schools.com/w3css/w3css_slideshow.asp">that on W3Schools</a>.</p>
 
         <h2>Organising CSS: BEM to the rescue</h2>
         <p>The cascade in CSS can be a monstrosity, and I believe it's a fundamentally flawed styling model. To begin
@@ -85,6 +104,12 @@
             mess of styling.
         </p>
 
+        <h2>Files of interest</h2>
+        <ul>
+            <li><a href="/view-src/server/setup_db.sql">setup_db.sql</a> - Defines tables for database</li>
+            <li><a href="/view-src/server/setup_db.sql">setup_db.sql</a> - Defines tables for database</li>
+        </ul>
+
         <h2>Resources used</h2>
         <ul>
             <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS reference</a></li>
@@ -95,14 +120,46 @@
 
     <section>
         <h1>JS</h1>
+        <p>I have put a huge amount of effort into the JS, trying to write as much of it from scratch leveraging web
+            APIs as possible. The code is written adhering to the ES6 standard so I get to use lots of nice features,
+            like:
+        </p>
+        <ul>
+            <li>Promises</li>
+            <li>let, const</li>
+            <li>destructuring</li>
+            <li>template strings</li>
+            <li>arrow functions</li>
+            <li>Class syntax</li>
+            <li>for .. of</li>
+            <li>for .. in</li>
+            <li>... splat operator</li>
+            <li>Set/Map</li>
+        </ul>
+        <p>I used all of the above across the site, ES6 is tolerable to develop in, unlike ES5! The backend makes
+            extensive use of promises as the repositories wrapping database access return promises and since they're
+            at the bottom of the caller hierarchy everything calling them needs to operate asynchronously (see the
+            excellent <a href="http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">red vs blue
+                functions article</a>).
+        </p>
+        <p>I used <a href="https://standardjs.com/">Standard</a>, a JS style guide enforcer (a linting tool based on
+            ESLint) to ensure consistent use of the language. I set up git-commit hooks to run standard on commit and
+            reject commits that weren't adhering to the standard style guide forcing me to follow it!
+        </p>
+
+        <h2>Files of interest</h2>
+        <ul>
+            <li><a href="/view-src/public/client/ui/whiteboard_ui.js">whiteboard_ui.js</a> -
+                Whiteboard UI controller</li>
+            <li><a href="/view-src/public/client/whiteboard_connection.js">whiteboard_connection.js</a> - Manages
+                WebSocket connection to server</li>
+        </ul>
+
         <h2>Resources used</h2>
         <ul>
             <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">MDN JS reference</a></li>
             <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
         </ul>
-        <p>
-            Used every framework: monogo/mean/js/express ALL OF THEM
-        </p>
     </section>
 
 
@@ -114,7 +171,8 @@
         <div class="center-container">
             <img class="_centered pixelated-img" src="/media/favicon.png" width="100" height="100">
         </div>
-        <p>The following steps were taken in creating the favicon</p>
+        <p>The slideshow (JS/CSS for the slideshow implemented myself) below demonstrates the steps taken in
+            creating the favicon</p>
         <div class="_center-container">
         <div id="png-slide-show" class="slide-show _centered">
             <div class="slide-show__buttonset">
@@ -122,7 +180,8 @@
                 <button class="slide-show__button slide-show__button--next">&#10095;</button>
             </div>
             <div class="slide-show__caption"></div>
-            <img class="pixelated-img slide-show__image" width="100" height="100" src="/media/favicon.png">
+            <img class="pixelated-img slide-show__image" width="100" height="100" src="/media/favicon.png" alt="The
+            final favicon (scaled without interpolation to show the pixel layout)">
             <img class="slide-show__image" src="/media/clippings/gpick-color-palette.png" alt="I used GPick
             to
             pull
@@ -133,16 +192,25 @@
             like font so investigated options online resulting in the choice of a font called 'Architects daughter'.
             I loaded this into my system by copying it into ~/.fonts/ and running `fc-cache -fv`">
             <img class="slide-show__image" src="/media/clippings/favicon-drop-shadow-application.png"
-                 alt="">
-            <img class="slide-show__image" src="/media/clippings/favicon-drop-shadow.png">
-            <img class="slide-show__image" src="/media/clippings/favicon-layers.png">
-            <img class="slide-show__image" src="/media/clippings/favicon-linear-gradient.png">
+                 alt="After creating the outline of a whiteboard, I wanted a drop shadow to make it look a little
+                 more 3D. I used the drop shadow filter to with 2x2 px offset">
+            <img class="slide-show__image" src="/media/clippings/favicon-drop-shadow.png" alt="This is the result
+            after adding the drop shadow">
+            <img class="slide-show__image" src="/media/clippings/favicon-layers.png" alt="I used layers to aid the
+            work during design, it allowed me to try different things and bin them quickly by deleting whole layers.
+            I also used layer transparency after applying the linear gradient to get a more subdued background.">
+            <img class="slide-show__image" src="/media/clippings/favicon-linear-gradient.png" alt="The white
+            background of the board looked a bit dull so I used the linear gradient tool to produce a bit more colour
+             variation on the favicon.">
             <img class="pixelated-img slide-show__image" width="100" height="100"
-                 src="/media/clippings/favicon-font-no-aa-small.png">
-            <img class="slide-show__image" src="/media/clippings/favicon-font-no-aa.png">
+                 src="/media/clippings/favicon-font-no-aa-small.png" alt="I experimented with toggling
+                 anti-aliasing on the font to see whether it improved the look. At larger sizes I preferred the
+                 aliased font, but at smaller sizes the anti-aliased look better">
+            <img class="slide-show__image" src="/media/clippings/favicon-font-no-aa.png" alt="Favicon zoomed without
+            AA">
             <img class="pixelated-img slide-show__image" width="100" height="100"
-                 src="/media/clippings/favicon-font-aa-small.png">
-            <img class="slide-show__image" src="/media/clippings/favicon-font-aa.png">
+                 src="/media/clippings/favicon-font-aa-small.png" alt="Favicon AA">
+            <img class="slide-show__image" src="/media/clippings/favicon-font-aa.png" alt="Favicon zoomed with AA">
         </div>
         </div>
     </section>
@@ -244,10 +312,10 @@
         <code>/view-src</code> route is used to read and inject source code into an HTML page with highlighting for
         reference in this report (for your reading pleasure!). We use WebSocket communication from the whiteboard
         app to enable real-time inter-person communication. Since WebSockets have no standard protocol of their own
-        (ignoring STUMP) I created my own protocol, messages are sent as JSON payloads with a <pre>command</pre> and
-        <pre>data</pre> field. The <pre>data</pre> field's structure is dependent upon the command. I created a
+        (ignoring STUMP) I created my own protocol, messages are sent as JSON payloads with a <code>command</code> and
+        <code>data</code> field. The <code>data</code> field's structure is dependent upon the command. I created a
         controller layer for the incoming WebSockets. When a message is received, it is parsed from JSON and the
-        controller method corresponding to the <pre>command</pre> field is invoked based on a callback lookup table
+        controller method corresponding to the <code>command</code> field is invoked based on a callback lookup table
         held by the controller; this gives an experience to writing controller methods similar to those for HTTP
         requests.
         </p>
@@ -267,6 +335,13 @@
             and HTML validation suite. Providing the tests passed the website would be bundled into a Heroku 'slug'
             and deployed to a Heroku instance therefore achieving a continuous-delivery pipeline ensuring quality and
             speedy delivery.</p>
+
+        <h2>Files of interest</h2>
+        <ul>
+            <li><a href="/view-src/server/app.js">app.js</a> - route definitions</li>
+            <li><a href="/view-src/server/controllers/whiteboard_ws_controller.js">whiteboard_ws_controller.js</a> -
+                WebSocket command controller</li>
+        </ul>
     </section>
 
 
@@ -277,13 +352,26 @@
             quick. I used the node-sqlite package  which wraps node-sqlite3 in promises as repetitively wrapping the
             normal functions in promises proved tiresome (and not DRY), rather than doing this myself I elected to
             use a library as I wouldn't have learnt much.</p>
-        <h2>Resources used</h2>
+
+        <h2>Files of interest</h2>
+        <ul>
+            <li><a href="/view-src/server/setup_db.sql">setup_db.sql</a> - Defines tables for database</li>
+            <li><a href="/view-src/server/repositories/board_repository.js">board_repository.js</a> - JS Class
+                wrapping DB access</li>
+        </ul>
     </section>
 
 
     <section>
         <h1>Dynamic pages</h1>
-        <h2>Resources used</h2>
+        <p>I used EJS for server side page creation, although the whiteboard app component does some HTML
+            manipulation on the client side</p>
+
+
+        <h2>Files of interest</h2>
+        <ul>
+            <li><a href="/view-src/server/pages.js">pages.js</a> - Definition of static pages</li>
+        </ul>
     </section>
 
 
@@ -426,8 +514,8 @@
             </tr>
             <tr>
                 <td>Database</td>
-                <td>C</td>
-                <td>5</td>
+                <td>A</td>
+                <td>7</td>
                 <td>
                     <ul>
                         <li>C means you've manually created a database, and then extracted data from it
@@ -480,7 +568,7 @@
             <tfoot>
             <tr>
                 <td>-</td>
-                <td>54 + depth/120</td>
+                <td>56 + depth/120</td>
                 <td>-</td>
                 <td>-</td>
             </tr>

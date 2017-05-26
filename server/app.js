@@ -67,6 +67,7 @@ app.get('/view-src/*', (request, response) => {
         response.send(masterPageTemplate({
           title: path.basename(srcPath),
           page: '../partials/src_viewer.ejs.html',
+          inlineTemplates: [],
           pageLocals: {
             src_path: srcPath,
             src: src,

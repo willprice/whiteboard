@@ -1,5 +1,23 @@
-<div class="board-gallery">
+<div class="board-gallery__header">
+    <div class="board-gallery__headertitle">Gallery</div>
+    <div class="board-gallery__headerbutton board-gallery__headerbutton--close">X</div>
+</div>
+<hr />
+
+<div class="board-gallery__boards">
     <% boards.forEach(function(board) { -%>
-    <%- include('/partials/components/board-gallery.html.ejs', board) %>
+    <div class="board-icon">
+        <div class="board-icon__field board-icon__field--name"><%= board.name %></div>
+        <div class="board-icon__field--hidden board-icon__field--id"><%= board.id %></div>
+        <div class="board-icon__field">
+            <% if (board.tags.length > 0) { -%>
+            <div class="board-icon__tags">
+                <% board.tags.forEach(function(tag) { -%>
+                <div class="board-icon__tag"><%= tag %></div>
+                <% }); -%>
+            </div>
+            <% } -%>
+        </div>
+    </div>
     <% }) -%>
 </div>

@@ -14,13 +14,15 @@ function wsUrl () {
 
 document.addEventListener('DOMContentLoaded', () => {
   const wsConnection = new WebSocketConnection(wsUrl())
-  const whiteboardApi = new WhiteboardAPI(wsConnection, serialisationTools.serialise, serialisationTools.deserialise)
-  const whiteboardSession = new WhiteboardSession(whiteboardApi)
+  wsConnection.setup().then(() => {
+    const whiteboardApi = new WhiteboardAPI(wsConnection, serialisationTools.serialise, serialisationTools.deserialise)
+    const whiteboardSession = new WhiteboardSession(whiteboardApi)
 
-  // eslint-disable-next-line
-  const whiteboardUI = new WhiteboardUI(document.querySelector('.whiteboard-app'), whiteboardSession.whiteboard)
-  // eslint-disable-next-line
-  const whiteboardTools = new WhiteboardToolsUI(document.querySelector('.whiteboard-tools'), whiteboardSession)
+    // eslint-disable-next-line
+    const whiteboardUI = new WhiteboardUI(document.querySelector('.whiteboard-app'), whiteboardSession.whiteboard)
+    // eslint-disable-next-line
+    const whiteboardTools = new WhiteboardToolsUI(document.querySelector('.whiteboard-tools'), whiteboardSession)
+  })
 })
 
 // function signOut () {

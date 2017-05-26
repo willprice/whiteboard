@@ -16,7 +16,6 @@ const serialise = serialisation.serialise
 
 describe('WhiteboardWSController', () => {
   let editSession = null
-  // eslint-disable-next-line
   let controller = null
   let ws = null
 
@@ -75,6 +74,24 @@ describe('WhiteboardWSController', () => {
         expect(sendSpy).to.have.been.calledWith(serialise({
           id: messageId,
           data: availableWhiteboards
+        }))
+      })
+    })
+  })
+
+  describe('message: fetch_board', () => {
+    let messageId = 2
+    let boardId = 1
+    let wb = boardMother.boardWithTriangles({ id: boardId })
+
+    it('returns board with requested id', () => {
+      let sendSpy = sinon.spy(ws, 'send')
+      editSession.fetchBoard.resolves(wb)
+
+      return sendMessage('fetch_board', { id: boardId }, messageId).then(() => {
+        expect(sendSpy).to.have.been.calledWith(serialise({
+          id: messageId,
+          data: wb
         }))
       })
     })

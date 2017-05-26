@@ -1,5 +1,5 @@
 .drop-down__container {
-    /* By default the modal isn't displayed, this is toggled in JS */
+    /* By default the drop-down isn't displayed, this is toggled in JS */
     visibility: hidden;
     position: fixed;
     z-index: 1;

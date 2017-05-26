@@ -182,6 +182,13 @@ describe('BoardRepository', () => {
       })
     })
   })
+
+  describe('fetchBoard', () => {
+    it('returns whiteboard with correct id', () => {
+
+    })
+  })
+
   function insertWhiteboards (wbs) {
     let insertionPromises = []
     wbs.forEach(function (boards, owner) {

@@ -19,6 +19,13 @@ class EditSession {
   listBoards () {
     return this.boardRepo.listBoards(this.owner)
   }
+
+  fetchBoard (id) {
+    return this.boardRepo.fetchBoard(id).then((wb) => {
+      this.wb = wb
+      return wb
+    })
+  }
 }
 
 module.exports = EditSession

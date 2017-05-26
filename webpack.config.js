@@ -36,6 +36,9 @@ module.exports = {
       path.resolve('./node_modules')
     ]
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     loaders: [{
       test: /\.js$/,

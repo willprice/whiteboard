@@ -24,11 +24,13 @@ describe('EditSession', () => {
     wb = boardMother.boardWithTriangles()
   })
 
-  it('creates new board in db', () => {
-    boardRepo.create.resolves(wb)
+  describe('newBoard', () => {
+    it('creates new board in db', () => {
+      boardRepo.create.resolves(wb)
 
-    return editSession.newBoard(wb.name, wb.tags, owner).then(() => {
-      expect(boardRepo.create).to.have.been.calledWithExactly(wb.name, wb.tags, owner)
+      return editSession.newBoard(wb.name, wb.tags, owner).then(() => {
+        expect(boardRepo.create).to.have.been.calledWithExactly(wb.name, wb.tags, owner)
+      })
     })
   })
 
@@ -55,7 +57,9 @@ describe('EditSession', () => {
         expect(editSession.wb.paths).to.be.deep.equal(wb.paths)
       })
     })
+  })
 
+  describe('listBoards', () => {
     it('lists all available whiteboards for user', () => {
       let whiteboards = [
         boardMother.boardWithTriangles({ name: 'WB1' }),
@@ -67,6 +71,28 @@ describe('EditSession', () => {
         expect(whiteboardsFromRepo).to.equal(whiteboards)
       }).then(() => {
         expect(boardRepo.listBoards).to.have.been.calledWith(owner)
+      })
+    })
+  })
+
+  describe('fetchBoard', () => {
+    let id = 1
+    let boardFromDb = null
+
+    beforeEach(() => {
+      boardFromDb = boardMother.boardWithTriangles({ id: id })
+      boardRepo.fetchBoard.resolves(boardFromDb)
+    })
+
+    it('resolves whiteboard with requested id', () => {
+      return editSession.fetchBoard(id).then((wb) => {
+        expect(wb.id).to.equal(1)
+      })
+    })
+
+    it('sets whiteboard from db as in whiteboard being edited', () => {
+      return editSession.fetchBoard(id).then(() => {
+        expect(editSession.wb).to.equal(boardFromDb)
       })
     })
   })

@@ -1,6 +1,9 @@
 <div class="whiteboard-app">
-<%- include('brush-tools.html.ejs') %>
-<%- include('whiteboard-canvas.html.ejs') %>
-<%- include('admin-tools.html.ejs') %>
-<%- include('drop-down.html.ejs', { body: 'save-form.html.ejs', body_data: {}, title: "Save" })%>
+    <%- include('brush-tools.html.ejs') %>
+    <%- include('whiteboard-canvas.html.ejs') %>
+    <%- include('admin-tools.html.ejs') %>
+    <%- include('drop-down.html.ejs', { body: 'save-form.html.ejs', body_data: {}, title: "Save" })%>
+    <div class="board-gallery__backdrop">
+        <div class="board-gallery"></div>
+    </div>
 </div>

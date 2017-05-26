@@ -45,6 +45,10 @@ class WhiteboardAPI {
     })
   }
 
+  listBoards () {
+    return this.connection.send('list_boards', null)
+  }
+
   /**
    * @param id - The id of the desired whiteboard (must exist)
    * @return {Promise<Whiteboard>} whiteboard corresponding to id

@@ -1,3 +1,24 @@
 .board-icon {
+    min-width: 5em;
+    height: 10em;
+    margin: 1em;
+    padding: 1em;
+    border: solid 1px;
+    border-radius: 10px;
+}
 
+.board-icon__field {
+    text-align: center;
+}
+.board-icon__field--name {
+    font-size: 24px;
+    margin-bottom: 1em;
+}
+
+.board-icon__tag {
+    background-color: #FFD5B2;
+    border: solid 2px;
+    border-color: #0077aa;
+    border-radius: 5px;
+    margin: 2px;
 }

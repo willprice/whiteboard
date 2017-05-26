@@ -1,6 +1,8 @@
 'use strict'
 const assert = require('assert')
 const Whiteboard = require('../../public/common/whiteboard')
+const Path = require('../../public/common/path')
+const Point = require('../../public/common/point')
 
 class BoardRepository {
   constructor (db) {
@@ -115,6 +117,42 @@ class BoardRepository {
         whiteboardPromises.push(this.getTags(wb))
       }
       return Promise.all(whiteboardPromises)
+    })
+  }
+
+  getPoints (pathId) {
+    return this.db.all('SELECT * FROM points WHERE path_id = $path_id', { $path_id: pathId }).then((rows) => {
+      return rows.map((row) => new Point(row.x, row.y))
+    })
+  }
+
+  getPaths (wb) {
+    assert(wb.id !== -1)
+    return this.db.all('SELECT * FROM paths WHERE board_id = $board_id', { $board_id: wb.id }).then((rows) => {
+      let pointPromises = []
+      for (let row of rows) {
+        let path = new Path()
+        path.color = row.color
+        path.width = row.width
+        pointPromises.push(
+          this.getPoints(row.id)
+          .then((points) => {
+            path.points = points
+            return path
+          })
+        )
+      }
+      return Promise.all(pointPromises)
+    })
+  }
+
+  fetchBoard (id) {
+    return this.db.get('SELECT * FROM boards WHERE id = $id', { $id: id }).then((row) => {
+      return new Whiteboard([], row.id, row.name)
+    }).then((wb) => {
+      return this.getTags(wb)
+    }).then((wb) => {
+      return this.getPaths(wb)
     })
   }
 }

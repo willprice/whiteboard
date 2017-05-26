@@ -15,8 +15,8 @@ class WhiteboardWSController {
     this.messageCallbacks['new_board'] = this.newBoard.bind(this)
     this.messageCallbacks['add_paths'] = this.addPaths.bind(this)
     this.messageCallbacks['list_boards'] = this.listBoards.bind(this)
+    this.messageCallbacks['fetch_board'] = this.fetchBoard.bind(this)
   }
-
   listen () {
     this.ws.on('message', this.handleMessage.bind(this))
   }
@@ -60,6 +60,12 @@ class WhiteboardWSController {
 
   addPaths (id, payload) {
     return this.editSession.addPaths(payload)
+  }
+
+  fetchBoard (id, payload) {
+    return this.editSession.fetchBoard(payload.id).then((wb) => {
+      this._respond(id, wb)
+    })
   }
 }
 

@@ -20,8 +20,7 @@ const STATIC_PAGES_DEFINITIONS = {
         '/build/whiteboard.js'
       ],
       inlineTemplates: {
-        board_gallery: '../public/partials/components/board-gallery.html.ejs',
-        board_icon: '../public/partials/components/board-icon.html.ejs'
+        'board-gallery': '../public/partials/components/board-gallery.html.ejs'
       },
       stylesheets: [
         '/styles/components/admin-tools.css',

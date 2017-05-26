@@ -1,4 +1,5 @@
 'use strict'
+const ejs = require('ejs')
 
 class WhiteboardToolsUI {
   constructor (element, whiteboardSession) {
@@ -7,6 +8,28 @@ class WhiteboardToolsUI {
     this.saveDialogElement = document.querySelector('.drop-down__container')
 
     this.setupCallbacks()
+    this.setupGallery()
+  }
+
+  setupGallery () {
+    this.whiteboardSession.listBoards().then((boards) => {
+      let template = this.getGalleryTemplate()
+      let hydratedGalleryTemplate = ejs.render(template, { boards: boards })
+      this.getGalleryElement().innerHTML = hydratedGalleryTemplate
+      this.getGalleryElement().querySelector('.board-gallery__headerbutton--close')
+        .addEventListener('click', this.hideGallery.bind(this))
+    }).then(this.setupGalleryEntries.bind(this))
+  }
+
+  setupGalleryEntries () {
+    this.getGalleryElement().querySelectorAll('.board-icon').forEach((boardIconElement) => {
+      let id = parseInt(boardIconElement.querySelector('.board-icon__field--id').innerText)
+      boardIconElement.addEventListener('click', () => {
+        console.log('Fetching ' + id)
+        this.whiteboardSession.loadBoard(id)
+        this.hideGallery()
+      })
+    })
   }
 
   setupCallbacks () {
@@ -74,7 +97,25 @@ class WhiteboardToolsUI {
     this.saveDialogElement.style.visibility = 'visible'
   }
 
+  getGalleryTemplate () {
+    let templateText = document.getElementById('board-gallery').innerText
+    return templateText
+  }
+
+  getGalleryElement () {
+    return document.querySelector('.board-gallery')
+  }
+
+  getGalleryContainer () {
+    return document.querySelector('.board-gallery__backdrop')
+  }
+
   showGallery () {
+    this.getGalleryContainer().style.visibility = 'visible'
+  }
+
+  hideGallery () {
+    this.getGalleryContainer().style.visibility = 'hidden'
   }
 }
 

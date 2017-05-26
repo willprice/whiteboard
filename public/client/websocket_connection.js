@@ -14,6 +14,17 @@ class WebsocketConnection {
     this._setupCallbacks()
   }
 
+  setup () {
+    return new Promise((resolve, reject) => {
+      this.connection.addEventListener('open', resolve)
+      this.connection.addEventListener('error', reject)
+      this.connection.addEventListener('close', reject)
+      if (this.connection.readyState === WebSocket.OPEN) {
+        resolve()
+      }
+    })
+  }
+
   _setupCallbacks () {
     this.connection.addEventListener('open', this._onOpen.bind(this))
     this.connection.addEventListener('message', this._onMessage.bind(this))

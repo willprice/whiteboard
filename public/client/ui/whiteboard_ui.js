@@ -1,5 +1,5 @@
-import { localiseClick } from '../dom_utils'
-import BrushToolsUI from './brushtools_ui'
+const localiseClick = require('../dom_utils').localiseClick
+const BrushToolsUI = require('./brushtools_ui')
 
 class WhiteboardUI {
   constructor (element, whiteboard) {
@@ -61,7 +61,7 @@ class WhiteboardUI {
     if (this.whiteboard.currentlyDrawing) {
       let clickPoint = localiseClick(event.target, event.pageX, event.pageY)
       this.whiteboard.updatePath(clickPoint.x, clickPoint.y)
-      this.whiteboard.paths[0].draw(this.context)
+      this.whiteboard.currentPath.draw(this.context)
     }
   }
 
@@ -75,4 +75,4 @@ class WhiteboardUI {
   }
 }
 
-export default WhiteboardUI
+module.exports = WhiteboardUI

@@ -3,7 +3,6 @@
 .site-header {
     display: flex;
     background: var(--color-2-light);
-    padding: 1em;
+    padding: 0.5em;
     justify-content: space-around;
-    height: 50px;
 }

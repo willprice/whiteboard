@@ -6,7 +6,7 @@ const path = require('path')
 const rootDir = path.join(__dirname, '..')
 const dirs = {
   public: path.join(rootDir, 'public'),
-  templates: path.join(rootDir, 'public', 'templates')
+  partials: path.join(rootDir, 'public', 'partials')
 }
 
 module.exports = {

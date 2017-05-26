@@ -14,9 +14,10 @@ module.exports = {
   // Paths in entry are resolved relative to `context`
   // defaults to process.cwd()
   context: path.join(__dirname, 'public/'),
-  entry: [
-    './client/app.js'
-  ],
+  entry: {
+    whiteboard: './client/app.js',
+    report: './client/report.js'
+  },
   // Instruct how compiled files should be written to disk
   output: {
     // output directory of compiled files
@@ -24,7 +25,7 @@ module.exports = {
     // URL path in server from which the files can loaded
     publicPath: '/build',
     // name of each output file on disk, can only be a name, not a path
-    filename: 'whiteboard.js'
+    filename: '[name].js'
   },
   plugins: debug ? [
     new webpack.NoEmitOnErrorsPlugin()

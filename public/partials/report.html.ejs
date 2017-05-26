@@ -1,44 +1,76 @@
 <div class="textual-content">
     <h1>CollaBoard Report (wp13824)</h1>
-    <p><a href="https://collaborative-whiteboard.herokuapp.com/">CollaBoard</a> is a collaborative whiteboard tool
-        produced by Will Price (wp13824/64496) alone.</p>
+    <section>
+        <p><a href="https://collaborative-whiteboard.herokuapp.com/">CollaBoard</a> (pronounced like a
+            contraction of collaborative whiteboard) is a collaborative whiteboard tool
+            produced by Will Price (wp13824/64496) alone. CollaBoard allows you to draw on a virtual whiteboard, save
+            those drawings (implemented), retrived those drawings (not implemented) and collaborate on them with others
+            (not implemented).</p>
 
-    <p>NOTE: The collaborative aspect is still in progress and hasn't been implemented yet</p>
-    <p><a href="https://www.cs.bris.ac.uk/Teaching/Resources/COMSM0104/cw/assign5/">Marking guidelines</a></p>
+        <p>NOTE: The collaborative aspect is still in progress and hasn't been implemented yet</p>
+        <p><a href="https://www.cs.bris.ac.uk/Teaching/Resources/COMSM0104/cw/assign5/">Marking guidelines</a></p>
+
+        <p>In approaching the assignment I had the choice of using frameworks I'd previously used, try new frameworks,
+            or try the vanilla approach: use as few frameworks as possible. As a learning exercise I elected to write as
+            much as possible relying on few libraries for features as I have previously written websites using WebMVC,
+            KnockoutJS etc and I was intrigued by the implication from the lectures that web standards are now good
+            enough that we can use native APIs instead of jquery.  With this in mind, my application only targets new
+            browsers. I have no interest in supporting anything too old to support the WebSockets API, ever-green browsers
+            have now enabled this approach.
+        </p>
+    </section>
 
     <section>
         <h1>HTML</h1>
+
         <p>The website is written in exclusively in HTML5, sadly not XHTML5 (as I agree that XHTML is a good idea)
             due to the use of the Google sign-in JS API that injects HTML valid in HTML5, but not in XHTML.</p>
+
+        <h2>HTML5 Validation</h2>
+        <p>I believe HTML validation is an important topic to be addressed by a high-quality website. If HTML is no
+            complaint then we end up with horrors like quirks-mode. To ensure my website is HTML5-complaint I used
+            the VNU HTML validator (the same as used by the W3C in their validation service). I wrote a node module
+            to create a Mocha test-suite fetching each page specified in a remote sitemap.xml file, run the page
+            through the VNU validator and report errors. I set up travis CI to run this script on git check-in to
+            ensure my site always remained HTML complaint if it wasn't it wouldn't be deployed to Heroku.</p>
+
+        <h2>Templating</h2>
+        <p>I chose to EJS for templating HTML. The use of templating is primarily to DRY up repetitious snippets of
+            HTML. Pages are all included in a master page template that has a header and footer giving consistent
+            branding to the website. The Head of the master page template is parameterised so that one can inject new
+            scripts and and stylesheets if so needed by pages.
+        </p>
+
         <h2>Resources used</h2>
         <ul>
             <li><a href="https://developer.mozilla.org/en/docs/Web/HTML">MDN HTML reference</a></li>
             <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
         </ul>
     </section>
+
+
     <section>
         <h1>CSS</h1>
-        <h2>Resources used</h2>
-        <ul>
-            <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS reference</a></li>
-            <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
-        </ul>
         <p>CSS</p>
-        <h2>Points of note</h2>
-        <p>The cascade in CSS can be a monstrosity, and I believe it's a fundamentally flawed styling, to begin with
-            sites starting small are pleasant to develop when making use of the cascade, but as time passes and a
-            site grows then you start to experience situations like in this video...
+
+        <h2>Organising CSS: BEM to the rescue</h2>
+        <p>The cascade in CSS can be a monstrosity, and I believe it's a fundamentally flawed styling model. To begin
+            with, sites start small and developing with the cascade is pleasant, but as time passes and a
+            site grows then you start to experience situations where you start inheriting styles from elements you
+            don't wish to, it can feel a bit like this video...
         </p>
         <div class="_center-container">
         <video class="_centered" src="https://video.twimg.com/tweet_video/C9oiOtjVYAIvk-5.mp4" controls
                autoplay
         loop></video>
         </div>
-        <p>
-            Trying to style one aspect of a page can become monumentally frustrating by
-        </p>
         <p>Current I favour the <a href="getbem.com/">BEM</a> methodology as it forces the use of CSS to style
-            components, completely avoiding the use of the cascade, when
+            components, completely avoiding the use of the cascade. Each UI component has its own corresponding style
+            file in <code>/styles/components</code>
+        </p>
+
+        <p>
+            When
             <a href="https://www.webcomponents.org/">Web components</a> are implemented by the major browsers I
             intend to switch to them instead; I believe components should consist of JS/HTML/CSS bundled all
             together, quite the opposite of the philosophy outlined in the lectures. This opinion applies
@@ -52,7 +84,15 @@
             says "...because writing CSS is easy; looking after it is not.", I want components, not a tightly coupled
             mess of styling.
         </p>
+
+        <h2>Resources used</h2>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS reference</a></li>
+            <li><a href="https://jsfiddle.net">JS Fiddle</a> - testing out idioms and prototyping</li>
+        </ul>
     </section>
+
+
     <section>
         <h1>JS</h1>
         <h2>Resources used</h2>
@@ -64,20 +104,109 @@
             Used every framework: monogo/mean/js/express ALL OF THEM
         </p>
     </section>
+
+
     <section>
         <h1>PNG</h1>
-        <h2>Resources used</h2>
+        <p>
+            I created a favicon in <a href="https://www.gimp.org/">GIMP</a>, the GNU Image Manipulation Tool.
+        </p>
+        <div class="center-container">
+            <img class="_centered pixelated-img" src="/media/favicon.png" width="100" height="100">
+        </div>
+        <p>The following steps were taken in creating the favicon</p>
+        <div class="_center-container">
+        <div id="png-slide-show" class="slide-show _centered">
+            <div class="slide-show__buttonset">
+                <button class="slide-show__button slide-show__button--prev">&#10094;</button>
+                <button class="slide-show__button slide-show__button--next">&#10095;</button>
+            </div>
+            <div class="slide-show__caption"></div>
+            <img class="pixelated-img slide-show__image" width="100" height="100" src="/media/favicon.png">
+            <img class="slide-show__image" src="/media/clippings/gpick-color-palette.png" alt="I used GPick
+            to
+            pull
+            colours out of a scheme I generated online, this allowed me to save the palette in a .GPL format used by
+            GIMP and Inkscape">
+            <img class="slide-show__image" src="/media/clippings/favicon-font-choice.png" alt="I wanted a
+            handdrawn
+            like font so investigated options online resulting in the choice of a font called 'Architects daughter'.
+            I loaded this into my system by copying it into ~/.fonts/ and running `fc-cache -fv`">
+            <img class="slide-show__image" src="/media/clippings/favicon-drop-shadow-application.png"
+                 alt="">
+            <img class="slide-show__image" src="/media/clippings/favicon-drop-shadow.png">
+            <img class="slide-show__image" src="/media/clippings/favicon-layers.png">
+            <img class="slide-show__image" src="/media/clippings/favicon-linear-gradient.png">
+            <img class="pixelated-img slide-show__image" width="100" height="100"
+                 src="/media/clippings/favicon-font-no-aa-small.png">
+            <img class="slide-show__image" src="/media/clippings/favicon-font-no-aa.png">
+            <img class="pixelated-img slide-show__image" width="100" height="100"
+                 src="/media/clippings/favicon-font-aa-small.png">
+            <img class="slide-show__image" src="/media/clippings/favicon-font-aa.png">
+        </div>
+        </div>
     </section>
+
+
     <section>
         <h1>SVG</h1>
         <p>
-            I used Inkscape to create an SVG logo of collaboard. Despite its simplicity I spent quite a lot of time
-            going through
-            tutorials and learning techniques testing out different styles until I found something that suited the
-            minimal aesthetic I was aiming for
+            I used Inkscape to create an SVG logo of CollaBoard. Despite its simplicity I spent quite a lot of time
+            going through tutorials and learning techniques testing out different styles until I found something that
+            suited the minimal aesthetic I was aiming for. I made two logos the first seemed too unfriendly so I
+            redesigned it using a warmer colour palette
         </p>
 
-        <img class="center" src="../media/logo.svg" alt="CollaBoard logo">
+        <div class="_center-container">
+            <img class="_centered" src="../media/old-logo.svg" alt="CollaBoard logo">
+            <p class="caption">Old logo</p>
+        </div>
+        <div class="_center-container">
+            <img class="_centered" src="../media/logo.svg" alt="CollaBoard logo">
+            <p class="caption">New logo</p>
+        </div>
+
+        <p>The slideshow below demonstrates the sequence of steps I used to produce the new logo</p>
+        <div id="svg-slide-show" class="slide-show">
+            <div class="slide-show__buttonset">
+                <button class="slide-show__button slide-show__button--prev">&#10094;</button>
+                <button class="slide-show__button slide-show__button--next">&#10095;</button>
+            </div>
+            <div class="slide-show__caption"></div>
+            <img class="slide-show__image" src="/media/clippings/inkscape-palette-loaded.png" alt="The GPL colour
+            palette was loaded by copying the palette file into ~/.config/inkscape/palettes/ and selecting it from
+            the drop down menu - user friendly!">
+            <img class="slide-show__image" src="/media/clippings/inkscape-rounded-rectangle.png" alt="I wanted a
+            whiteboard on which to write the product's name. The rectangle tool was used to create a rectangle
+            and the rounded corners selector was used to ease the harsh edges">
+            <img class="slide-show__image" src="/media/clippings/inkscape-board-colours.png" alt="I changed the
+            colours of the board to those in the palette by use of the fill and stroke settings">
+            <img class="slide-show__image" src="/media/clippings/inkscape-text.png" alt="I wanted collaboard to be
+            written like it was hand written, albeit with more regularity. I found a font called 'Architects
+            daughter' that severed this purpose well">
+            <img class="slide-show__image" src="/media/clippings/inkscape-text-kerning.png" alt="Once I scaled the
+            text to the desired size I was unhappy at the weight of the font, I wanted it to be like it was drawn
+            with a fatter marker. The font didn't have different weights so instead I had to emulate this. To fatten the
+            text I first manually adjusted the kerning to increase the spacing between letters so that the resulting
+            text once enlarged would have correct kerning. I also adjusted the height and rotation of some of the
+            letters to introduce a bit of irregularity which handwritten text would exhibit.">
+            <img class="slide-show__image" src="/media/clippings/inkscape-text-dynamic-offset.png" alt="I used the
+            dynamic offset path tool after converting the text to a path to 'fatten' the text up">
+            <img class="slide-show__image" src="/media/clippings/inkscape-text-dynamic-rotate.png" alt="I then rotated
+                 the text path using the transform tool by 15 degrees to allow enlaring the text to take up more of the
+                 board">
+            <img class="slide-show__image" src="/media/clippings/inkscape-wiggle-line-hard.png" alt="At this stage I
+            felt the logo lacked personality so I wanted to add a playful scribble at the bottom left. To this I
+            created a zig-zag with the bezier tool which I then later smoothed.">
+            <img class="slide-show__image" src="/media/clippings/inkscape-wiggle-line-bottom-symmetric.png" alt="To
+            smoothen the zig zag I used 'Make node symmetric' which introduced converted the node to a
+            piece of a first-order bezier path (control points form a tanget at the point)">
+            <img class="slide-show__image" src="/media/clippings/inkscape-wiggle-line-top-symmetric.png" alt="Using
+            the same technique I smoothed the top zig-zags">
+            <img class="slide-show__image" src="/media/clippings/inkscape-wiggle-line-tweaking-bezier-control-points.png"
+                 alt="Finally I fine-tweaked the path to look like a scribble one would naturally draw on a
+            whiteboard">
+        </div>
 
         <h2>Resources used</h2>
         <ul>
@@ -91,21 +220,72 @@
                     Elements of design</a></li>
         </ul>
     </section>
+
+
     <section>
         <h1>Server</h1>
-        <h2>Resources used</h2>
+
+        <h2>Code and patterns</h2>
+        <p>The server is built on <a href="https://expressjs.com/">ExpressJS</a>, a basic bare-bones web server
+            providing routing functionality. I also made use of
+            <a href="https://github.com/HenningM/express-ws">express-ws</a>, a middle-ware package for adding
+            websocket support to the server (mediated by the use of <a href="https://github .com/websockets/ws">ws</a>,
+            the standard websocket js library).
+        </p>
+
+        <p>The server can be divided into two aspects, the static site server and the WebSockets whiteboard app. The
+            static site server makes use of <a href="http://ejs.co/">EJS</a> for templating needs. The static pages
+            are defined in <a href="/view-src/server/pages.js">pages.js</a>
+        </p>
+
+        <p>The server is built on the standard enterprise web application architecture with a three tier structure:
+            controller, domain and repository. The controller layer is composed of ExpressJS routers that handle
+            requests for static pages--nothing more complicated is necessary. A dynamic controller for the
+        <code>/view-src</code> route is used to read and inject source code into an HTML page with highlighting for
+        reference in this report (for your reading pleasure!). We use WebSocket communication from the whiteboard
+        app to enable real-time inter-person communication. Since WebSockets have no standard protocol of their own
+        (ignoring STUMP) I created my own protocol, messages are sent as JSON payloads with a <pre>command</pre> and
+        <pre>data</pre> field. The <pre>data</pre> field's structure is dependent upon the command. I created a
+        controller layer for the incoming WebSockets. When a message is received, it is parsed from JSON and the
+        controller method corresponding to the <pre>command</pre> field is invoked based on a callback lookup table
+        held by the controller; this gives an experience to writing controller methods similar to those for HTTP
+        requests.
+        </p>
+
+        <h2>Testing & Continuous Integration</h2>
+        <p>I developed my code using TDD using the <a>Mocha</a> test-suite library and <a>chai</a> assertion library.
+        I used <a>sinon</a> to mock dependencies which were injected into constructors (dependency injection through
+            constructor injection) and checked expected interactions took place.
+        </p>
+        <p>To ensure the integrity of the project was upheld, the unit tests were run on a git check-in by
+            Travis CI. The unit tests were run, the HTML validated and the client side JS compiled into a bundle
+            using Webpack.</p>
+
+
+        <h2>Deployment</h2>
+        <p>On git check-in to github Travis CI would pull the repository, install the dependencies, run the unit tests
+            and HTML validation suite. Providing the tests passed the website would be bundled into a Heroku 'slug'
+            and deployed to a Heroku instance therefore achieving a continuous-delivery pipeline ensuring quality and
+            speedy delivery.</p>
     </section>
+
+
     <section>
         <h1>Database</h1>
+        <p>Following the standard 3 tier web architecture, I wrapped my database operations in classes using the
+            repository pattern. I wrote integration tests using a SQLite in memory database which proved remarkably
+            quick. I used the node-sqlite package  which wraps node-sqlite3 in promises as repetitively wrapping the
+            normal functions in promises proved tiresome (and not DRY), rather than doing this myself I elected to
+            use a library as I wouldn't have learnt much.</p>
         <h2>Resources used</h2>
     </section>
+
+
     <section>
         <h1>Dynamic pages</h1>
         <h2>Resources used</h2>
     </section>
-    <section>
-        <h1>Depth</h1>
-    </section>
+
 
     <section>
         <p>Marking criteria:</p>
@@ -186,7 +366,7 @@
             <tr>
                 <td>PNG</td>
                 <td>X</td>
-                <td>0</td>
+                <td>7</td>
                 <td>
                     <ul>
                         <li>C means you've sorted out basic skills such as converting images to PNG,
@@ -205,8 +385,8 @@
             </tr>
             <tr>
                 <td>SVG</td>
-                <td>C</td>
-                <td>5</td>
+                <td>A</td>
+                <td>7</td>
                 <td>
                     <ul>
 
@@ -225,8 +405,8 @@
             </tr>
             <tr>
                 <td>Server</td>
-                <td>B</td>
-                <td>6</td>
+                <td>A</td>
+                <td>7</td>
                 <td>
 
                     <ul>
@@ -246,8 +426,8 @@
             </tr>
             <tr>
                 <td>Database</td>
-                <td>X</td>
-                <td>0</td>
+                <td>C</td>
+                <td>5</td>
                 <td>
                     <ul>
                         <li>C means you've manually created a database, and then extracted data from it
@@ -287,7 +467,7 @@
             <tr>
                 <td>Depth (out of 40)</td>
                 <td>30</td>
-                <td>10</td>
+                <td></td>
                 <td>
                     For depth,
                     you might want to write something longer which explains your overall aims and
@@ -300,7 +480,7 @@
             <tfoot>
             <tr>
                 <td>-</td>
-                <td>49/120</td>
+                <td>54 + depth/120</td>
                 <td>-</td>
                 <td>-</td>
             </tr>
@@ -323,5 +503,9 @@
                     repo</a> Reference for how to integrate express and webpack for local development needs
             </li>
         </ul>
+    </section>
+    <section>
+        <h1>Closing notes</h1>
+        <p>I didn't get as far as I wanted</p>
     </section>
 </div>

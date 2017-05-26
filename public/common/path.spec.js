@@ -1,12 +1,11 @@
 'use strict'
 /* global describe, it, beforeEach */
 
-import chai from 'chai'
-const assert = chai.assert
-import mockContext from './test/mocks/2d_context_mock'
+const assert = require('chai').assert
+const mockContext = require('./spec_helpers/2d_context_mock')
 
-import Path from './path'
-import Point from './point'
+const Path = require('./path')
+const Point = require('./point')
 
 describe('Path', () => {
   it('adding point to path', () => {
@@ -24,8 +23,8 @@ describe('Path', () => {
   function createAndDrawPath () {
     let path = new Path()
     path.add(0, 1)
-    path.setColor('#fff')
-    path.setWidth(5)
+    path.color = '#fff'
+    path.width = 5
 
     path.draw(context)
     return path

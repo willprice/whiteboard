@@ -1,0 +1,11 @@
+<section>
+    <h1><%= src_path %></h1>
+
+<% if (lines.length > 0) { -%>
+<pre data-line="<%= lines %>">
+<% } else { -%>
+<pre><% } -%>
+<code class="language-<%= language %>"><%= src %></code>
+</pre>
+
+</section>

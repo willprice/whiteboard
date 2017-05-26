@@ -1,6 +1,6 @@
 'use strict'
 
-import Point from '../common/point'
+const Point = require('../common/point')
 
 function localiseClick (obj, clickX, clickY) {
   const xRelativeToObj = clickX - obj.offsetLeft
@@ -12,4 +12,7 @@ function toPx (integer) {
   return integer.toString() + 'px'
 }
 
-export { localiseClick, toPx }
+module.exports = {
+  localiseClick: localiseClick,
+  toPx: toPx
+}

@@ -1,5 +1,5 @@
 'use strict'
-import { toPx } from '../dom_utils'
+const toPx = require('../dom_utils').toPx
 
 class BrushToolsUI {
   constructor (element, whiteboard) {
@@ -8,8 +8,7 @@ class BrushToolsUI {
     this.brushElement = element.querySelector('.currentbrush > .brush-icon')
     this.brushSliderElement = element.querySelector('.brush-sizer > .adjuster')
 
-    this.whiteboard = whiteboard
-    this.brushTools = whiteboard.brushTools
+    this.brush = whiteboard.brush
 
     this.setupBrush()
     this.setupPalette()
@@ -26,20 +25,20 @@ class BrushToolsUI {
       this.brushElement.style.height = newSize.toString() + 'px'
       this.brushElement.style.margin = marginRadius.toString() + 'px'
 
-      this.brushTools.setStrokeSize(newSize)
+      this.brush.setStrokeSize(newSize)
     }
     this.brushSliderElement.addEventListener('input', updateBrushSizeCallback.bind(this))
   }
 
   setupBrush () {
-    this.brushElement.style.width = toPx(this.brushTools.currentLineWidth)
-    this.brushElement.style.height = toPx(this.brushTools.currentLineWidth)
-    this.brushElement.style.backgroundColor = this.brushTools.currentColor
+    this.brushElement.style.width = toPx(this.brush.currentLineWidth)
+    this.brushElement.style.height = toPx(this.brush.currentLineWidth)
+    this.brushElement.style.backgroundColor = this.brush.currentColor
   }
 
   setupPalette () {
-    for (let i = 0; i < this.brushTools.colors.length; i++) {
-      let color = this.brushTools.colors[i]
+    for (let i = 0; i < this.brush.colors.length; i++) {
+      let color = this.brush.colors[i]
       let colorElement = document.createElement('div')
       colorElement.className = 'brush-icon'
       colorElement.style.backgroundColor = color
@@ -52,8 +51,8 @@ class BrushToolsUI {
 
   setColor (color) {
     this.brushElement.style.backgroundColor = color
-    this.brushTools.setColor(color)
+    this.brush.setColor(color)
   }
 }
 
-export default BrushToolsUI
+module.exports = BrushToolsUI

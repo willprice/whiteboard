@@ -1,6 +1,6 @@
 'use strict'
 
-class BrushTools {
+class Brush {
   constructor () {
     this.colors = ['black', 'gray', 'blue', 'green', 'orange', 'red', 'yellow', 'white']
     this.currentColor = this.colors[0]
@@ -16,4 +16,4 @@ class BrushTools {
   }
 }
 
-export default BrushTools
+module.exports = Brush

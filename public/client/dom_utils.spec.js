@@ -1,11 +1,10 @@
 'use strict'
 /* global describe, it */
 
-import chai from 'chai'
-const assert = chai.assert
+const assert = require('chai').assert
 
-import { localiseClick } from './dom_utils'
-import Point from 'common/point'
+const localiseClick = require('./dom_utils').localiseClick
+const Point = require('../common/point')
 
 describe('dom_utils', () => {
   it('localising click', () => {

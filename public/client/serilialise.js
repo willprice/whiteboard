@@ -1,9 +1,9 @@
 'use strict'
-import serialijse from 'serialijse'
-import Whiteboard from './whiteboard'
-import BrushTools from './brushtools'
-import Path from '../common/path'
-import Point from '../common/point'
+const serialijse = require('serialijse')
+const Whiteboard = require('./../common/whiteboard')
+const BrushTools = require('./../common/brush')
+const Path = require('../common/path')
+const Point = require('../common/point')
 
 serialijse.declarePersistable(Whiteboard)
 serialijse.declarePersistable(BrushTools)
@@ -14,4 +14,11 @@ function serialise (obj) {
   return serialijse.serialize(obj)
 }
 
-export default serialise
+function deserialise (str) {
+  return serialijse.deserialize(str)
+}
+
+module.exports = {
+  serialise: serialise,
+  deserialise: deserialise
+}

@@ -1,6 +1,6 @@
 'use strict'
 
-import sinon from 'sinon'
+const sinon = require('sinon')
 
 function mockContext () {
   return {
@@ -14,4 +14,4 @@ function mockContext () {
   }
 }
 
-export default mockContext
+module.exports = mockContext

@@ -1,6 +1,6 @@
 'use strict'
 
-import Point from './point'
+const Point = require('./point')
 
 class Path {
   constructor () {
@@ -9,19 +9,19 @@ class Path {
     this._width = 1
   }
 
-  setColor (color) {
+  set color (color) {
     this._color = color
   }
 
-  color () {
+  get color () {
     return this._color
   }
 
-  setWidth (width) {
+  set width (width) {
     this._width = width
   }
 
-  width () {
+  get width () {
     return this._width
   }
 
@@ -31,16 +31,16 @@ class Path {
 
   draw (canvas) {
     canvas.beginPath()
-    canvas.strokeStyle = this.color()
-    canvas.fillStyle = this.color()
-    canvas.lineWidth = this.width()
+    canvas.strokeStyle = this.color
+    canvas.fillStyle = this.color
+    canvas.lineWidth = this.width
     for (let i = 1; i < this.points.length; i++) {
       canvas.moveTo(this.points[i - 1].x, this.points[i - 1].y)
       canvas.lineTo(this.points[i].x, this.points[i].y)
-      canvas.fillRect(this.points[i].x - this.width() / 3, this.points[i].y - this.width() / 3, this.width() * 2 / 3, this.width() * 2 / 3)
+      canvas.fillRect(this.points[i].x - this.width / 3, this.points[i].y - this.width / 3, this.width * 2 / 3, this.width * 2 / 3)
     }
     canvas.stroke()
     canvas.closePath()
   }
 }
-export default Path
+module.exports = Path

@@ -1,0 +1,32 @@
+.slide-show__buttonset {
+    width: 100%;
+    display: flex;
+}
+
+.slide-show__button {
+    border: none;
+    margin: 0 auto;
+    display: inline-block;
+    outline: 1px;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: #fefefe;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.slide-show__button:hover {
+    background-color: #FFD5B2;
+}
+
+.slide-show__image {
+    display: none;
+    margin: 0 auto;
+}
+
+.slide-show__image--default {
+    display: block;
+}

@@ -7,15 +7,15 @@
 const STATIC_PAGES_DEFINITIONS = {
   '/': {
     title: 'Welcome to CollaBoard',
-    page: 'landing.html.ejs',
+    page: '../partials/landing.html.ejs',
     pageLocals: {},
     scripts: [],
     stylesheets: []
   },
 
-  '/whiteboard': {
+  '/whiteboard/*': {
     title: 'CollaBoard App',
-    page: 'components/whiteboard.html.ejs',
+    page: '../partials/components/whiteboard.html.ejs',
     pageLocals: {},
     scripts: [
       '/build/whiteboard.js'
@@ -37,7 +37,7 @@ const STATIC_PAGES_DEFINITIONS = {
 
   '/about': {
     title: 'About CollaBoard',
-    page: 'about.html.ejs',
+    page: '../partials/about.html.ejs',
     pageLocals: {},
     scripts: [],
     stylesheets: []
@@ -45,15 +45,19 @@ const STATIC_PAGES_DEFINITIONS = {
 
   '/report': {
     title: 'CollaBoard WebTech report',
-    page: 'report.html.ejs',
+    page: '../partials/report.html.ejs',
     pageLocals: {},
-    scripts: [],
-    stylesheets: []
+    scripts: [
+      '/build/report.js'
+    ],
+    stylesheets: [
+      '/styles/components/slide-show.css'
+    ]
   },
 
   '/tutorial': {
     title: 'CollaBoard Tutorial',
-    page: 'tutorial.html.ejs',
+    page: '../partials/tutorial.html.ejs',
     pageLocals: {},
     scripts: [],
     stylesheets: []

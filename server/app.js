@@ -7,18 +7,15 @@ const express = require('express')
 const ejs = require('ejs')
 const bunyan = require('bunyan')
 const bodyParser = require('body-parser')
-const sqlite3 = require('sqlite3').verbose()
 const sm = require('sitemap')
 const fs = require('fs')
 
 const config = require('./config')
 const dirs = config.dirs
-const DB_SCHEMA = require('./schema')
 const staticPages = require('./pages')
 
 const log = bunyan.createLogger({name: 'collaboard'})
 
-const db = new sqlite3.Database('collaboard.db')
 const app = express()
 expressWs(app)
 app.use(bodyParser.json())
@@ -37,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // > POST updates a resource, adds a subsidiary resource, or causes a change. A POST is not idempotent, in the way that > POST updates a resource, adds a subsidiary resource, or causes a change. A POST is not idempotent, in the way that
 // > x++ is not idempotent.
 
-const masterPageTemplatePath = path.join(dirs.templates, 'page.html.ejs')
+const masterPageTemplatePath = path.join(dirs.partials, 'page.html.ejs')
 const masterPageTemplateString = fs.readFileSync(masterPageTemplatePath, 'utf8')
 const masterPageTemplate = ejs.compile(masterPageTemplateString, { filename: masterPageTemplatePath })
 
@@ -56,38 +53,41 @@ app.get('/sitemap.xml', (request, response) => {
   })
 })
 
-app.get('/api/board/:boardId', (request, response) => {
-  response.type('html')
-  ejs.renderFile(path.join(dirs.public, 'index.ejs'), {}, {}, (err, str) => {
-    if (err) {
-      log.error(err)
-      response.status(404)
-    } else {
-      response.send(str)
-    }
-    response.end()
-  })
-})
-
-app.get('/api/board/', (request, response) => {
-  db.run(`INSERT INTO ${DB_SCHEMA.boards_table} DEFAULT VALUES`, function (error) {
-    if (error) {
-      log.error('Error creating new board')
-      log.error(error)
-      response.status(500)
-    } else {
-      log.info(this.lastID)
-      response.send('' + this.lastID)
-    }
-    response.end()
-  })
+app.get('/view-src/*', (request, response) => {
+  let srcPath = path.join(__dirname, '..', request.path.substring('/view-src/'.length - 1))
+  log.info(srcPath)
+  if (fs.existsSync(srcPath)) {
+    fs.readFile(srcPath, 'utf8', (err, src) => {
+      if (err) {
+        response.status(500).end()
+      } else {
+        response.send(masterPageTemplate({
+          title: path.basename(srcPath),
+          page: '../partials/src_viewer.ejs.html',
+          pageLocals: {
+            src_path: srcPath,
+            src: src,
+            lines: request.query.lines || '',
+            language: request.query.language || path.extname(srcPath).substring(1)
+          },
+          scripts: ['/vendor/prism/prism.js'],
+          stylesheets: ['/vendor/prism/prism.css']
+        }))
+      }
+    })
+  } else {
+    response.status(404).end()
+  }
 })
 
 app.ws('/api/v1', (ws, request) => {
-  log.info('Websocket connected')
+  log.info('WebSocket connected')
   ws.on('message', (msg) => {
     log.info('Received ws message')
     log.info(msg)
+  })
+  ws.on('close', () => {
+    log.info('WebSocket closed')
   })
 })
 

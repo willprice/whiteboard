@@ -53,4 +53,4 @@ class WebsocketConnection {
   }
 }
 
-export default WebsocketConnection
+module.exports = WebsocketConnection

@@ -12,7 +12,22 @@
     align-content: space-around;
 }
 .site-footer a {
-    height: 30px;
-    padding: 1em;
+}
+
+.site-footer__link {
+    font-family: "Architects Daughter", sans-serif;
+    font-weight: 600;
+    font-size: 16pt;
+    padding: 0.6em;
+    margin: 0.5em;
     text-align: center;
+    border-radius: 5px;
+    border: 2px solid #00447E;
+    background-color: #fefefe;
+    color: #0D5C63;
+    text-decoration: none;
+}
+
+.site-footer__link:hover {
+    background-color: #FFD5B2;
 }

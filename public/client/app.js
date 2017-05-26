@@ -1,12 +1,13 @@
 'use strict'
 /* globals location */
 
-import WhiteboardUI from './ui/whiteboard_ui'
-import WhiteboardToolsUI from './ui/whiteboard_tools'
-import Whiteboard from './whiteboard'
-import WebSocketConnection from './websocket_connection'
-import WhiteboardAPI from './whiteboard_api'
-import serialise from './serilialise'
+const WhiteboardUI = require('./ui/whiteboard_ui')
+const WhiteboardToolsUI = require('./ui/whiteboard_tools')
+const WebSocketConnection = require('./websocket_connection')
+const WhiteboardAPI = require('./whiteboard_api')
+const WhiteboardSession = require('./whiteboard_session')
+const serialise = require('./serilialise').serialise
+const deserialise = require('./serilialise').deserialise
 
 function wsUrl () {
   return `ws://${location.host}/api/v1`
@@ -14,12 +15,13 @@ function wsUrl () {
 
 document.addEventListener('DOMContentLoaded', () => {
   const wsConnection = new WebSocketConnection(wsUrl())
-  const whiteboard = new Whiteboard()
-  const whiteboardApi = new WhiteboardAPI(wsConnection, serialise)
+  const whiteboardApi = new WhiteboardAPI(wsConnection, serialise, deserialise)
+  const whiteboardSession = new WhiteboardSession(whiteboardApi)
+
   // eslint-disable-next-line
-  const whiteboardUI = new WhiteboardUI(document.querySelector('.whiteboard-app'), whiteboard)
+  const whiteboardUI = new WhiteboardUI(document.querySelector('.whiteboard-app'), whiteboardSession.whiteboard)
   // eslint-disable-next-line
-  const whiteboardTools = new WhiteboardToolsUI(document.querySelector('.whiteboard-tools'), whiteboard, whiteboardApi)
+  const whiteboardTools = new WhiteboardToolsUI(document.querySelector('.whiteboard-tools'), whiteboardSession)
 })
 
 // function signOut () {

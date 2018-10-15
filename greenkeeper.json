@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "experiments/web-sockets-tutorial/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
